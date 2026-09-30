@@ -1,0 +1,207 @@
+{
+  ".agents/PLANS.md": {
+    "bytes": 1237,
+    "lines": 47,
+    "sha256": "369ce6d5c47b6a9e19634d29f9f38a14787294e492079f11100b488fabd58cff"
+  },
+  ".agents/README.md": {
+    "bytes": 1529,
+    "lines": 53,
+    "sha256": "8d2a427d7f6c05e5e719840365afde28558e8f0b962c5810450850be8f3d37d8"
+  },
+  ".agents/policies/completion.md": {
+    "bytes": 626,
+    "lines": 22,
+    "sha256": "011837a10319ab6a0c795e14e28d61e66212f6eb5039a8e53af9631aa6d24378"
+  },
+  ".agents/policies/dependencies.md": {
+    "bytes": 465,
+    "lines": 15,
+    "sha256": "45f1f0e27cc770b6f704f77676d26c5c0d9f0919205978ad0115a60c3431c44c"
+  },
+  ".agents/policies/documentation.md": {
+    "bytes": 569,
+    "lines": 22,
+    "sha256": "f4a4126e803f3e954f9814be7dfae993681b8aeea5a121eac558cc00b09479f9"
+  },
+  ".agents/policies/evidence-and-provenance.md": {
+    "bytes": 679,
+    "lines": 34,
+    "sha256": "3e82ba9adb8d578335a2e22ba83c4d4b10c66841861336d92a00170dc237bdf1"
+  },
+  ".agents/policies/experiments-and-benchmarks.md": {
+    "bytes": 638,
+    "lines": 28,
+    "sha256": "3279b6fb2b28e1ef6ada8612de67860847449dad609889c7605a1d5183923638"
+  },
+  ".agents/policies/large-files-and-data.md": {
+    "bytes": 540,
+    "lines": 28,
+    "sha256": "4a8330229c016d1ba944f91bef1cd8f5da652116381bf7555915e8ebfe7ee391"
+  },
+  ".agents/policies/production-safety.md": {
+    "bytes": 629,
+    "lines": 27,
+    "sha256": "8b7896fc7bc665bb46a5090e6c64f24603214254054985e501ced4e784b1dcb6"
+  },
+  ".agents/policies/repository-safety.md": {
+    "bytes": 510,
+    "lines": 18,
+    "sha256": "f5a28c5f0bdc88ab07c4782ac3b7c32c977ae1facbbe65e3813cb8c80a14369e"
+  },
+  ".agents/policies/review-and-status.md": {
+    "bytes": 729,
+    "lines": 19,
+    "sha256": "73a548272ca781b406b801313c7c36746dd64bcc924e2a075e5349e6d517621c"
+  },
+  ".agents/policies/task-contracts.md": {
+    "bytes": 581,
+    "lines": 21,
+    "sha256": "b87f41b4babd994775d78fcc20ddb53ef99f0070983ddd1754b339fbefdb3024"
+  },
+  ".agents/policies/testing.md": {
+    "bytes": 818,
+    "lines": 22,
+    "sha256": "0f8dd96505c075276ebba52a8f0999a3a8d9a28bb8aecbebf75e8d4e111c0a8f"
+  },
+  ".agents/policies/tool-authority.md": {
+    "bytes": 696,
+    "lines": 16,
+    "sha256": "a324b694bb5a2c2e216a03b56a46710e33c4760eb96b61946aa6f3171ced8aec"
+  },
+  ".agents/policies/versioning-and-compatibility.md": {
+    "bytes": 691,
+    "lines": 25,
+    "sha256": "b140ed792725ec802f5b678f4e5eddc78e9cb077dd3eff4570107416ed520e15"
+  },
+  ".agents/roles/architect.md": {
+    "bytes": 783,
+    "lines": 20,
+    "sha256": "e3e82452b97694b72b3c93fbb934e20c620ee7573802c62066a4217e5550f2a8"
+  },
+  ".agents/roles/challenger.md": {
+    "bytes": 1417,
+    "lines": 59,
+    "sha256": "0659f393ff08ba5fb26e125162441c945dc0b7158161182e74da7283a3f5a33b"
+  },
+  ".agents/roles/data-database.md": {
+    "bytes": 599,
+    "lines": 18,
+    "sha256": "079bb322a959536eea1ed99ee996383acce96752c5062c2d5da5e8ecb01e3ea1"
+  },
+  ".agents/roles/documentation.md": {
+    "bytes": 613,
+    "lines": 16,
+    "sha256": "59af47b1c558df48f6e663d0b94b75dc880c488e8dfa71d5ca2580c789a18a7f"
+  },
+  ".agents/roles/implementer.md": {
+    "bytes": 1223,
+    "lines": 31,
+    "sha256": "a3c95e6b55dbc4be783617755269d1f8873168286cd418402d2fab47501b3edd"
+  },
+  ".agents/roles/moderator.md": {
+    "bytes": 1448,
+    "lines": 51,
+    "sha256": "294ee4f57c78aca0732f19b4e9e0462a97bf243b5ef6a34075fef8420fae43d1"
+  },
+  ".agents/roles/release.md": {
+    "bytes": 587,
+    "lines": 17,
+    "sha256": "0654256aef29c71dcfbdefde20fb97c959b11b365f6f01c279e524c64b4bfa9f"
+  },
+  ".agents/roles/repository-manager.md": {
+    "bytes": 666,
+    "lines": 18,
+    "sha256": "03f523e0fdd527c42cf1cf27d823971282cb7d6bb9b0fc16041dfabece1cd6e4"
+  },
+  ".agents/roles/research-ml.md": {
+    "bytes": 763,
+    "lines": 18,
+    "sha256": "ac37b1e9d47e2a2d0cd9fef275018e47bef3f5ae2d31451e30662414f0375fce"
+  },
+  ".agents/roles/security.md": {
+    "bytes": 575,
+    "lines": 22,
+    "sha256": "92d763efa3da159b5afbf5f2d6f597ee903c1220662df79c7caaf61e85f0618e"
+  },
+  ".agents/roles/test-manager.md": {
+    "bytes": 726,
+    "lines": 18,
+    "sha256": "40414d8901852c33f693cdb82799a03cc7b0ff304110f8611e96e18cb07f97ca"
+  },
+  ".agents/skills/benchmark/SKILL.md": {
+    "bytes": 599,
+    "lines": 15,
+    "sha256": "c2691888fa1f42d9f9d56c33268e0b738483f37c4a51f1d2891ff2a4297f6275"
+  },
+  ".agents/skills/database-migration/SKILL.md": {
+    "bytes": 700,
+    "lines": 21,
+    "sha256": "732fb8d22dffc8d43b24759766e1213bb39c330244813fb59277f9f1b7edda5d"
+  },
+  ".agents/skills/dependency-upgrade/SKILL.md": {
+    "bytes": 488,
+    "lines": 13,
+    "sha256": "3dd8f96f2dbfd2004f0242a8e0c35c95adb4cc0f8ac62a3dc4869460a96e179f"
+  },
+  ".agents/skills/release/SKILL.md": {
+    "bytes": 463,
+    "lines": 14,
+    "sha256": "bf2fbef93431627a9eb00f7c0e7fc21d136057f29a00a907c692bfc836aea055"
+  },
+  ".agents/skills/security-audit/SKILL.md": {
+    "bytes": 598,
+    "lines": 16,
+    "sha256": "bd68c93ba9b8f8cc4ed579bca4624f48384998991e6a2f7f6c707c0bb6d33238"
+  },
+  ".agents/templates/HANDOFF.md": {
+    "bytes": 381,
+    "lines": 29,
+    "sha256": "b705739a6df23e5c0e65ba741b1986bb3c48f3780bdddcc660fe9b85849bef9a"
+  },
+  ".agents/templates/NESTED_AGENTS.md": {
+    "bytes": 477,
+    "lines": 27,
+    "sha256": "f6d6a3e0c872fbf6adb6c96c061289a2b62c26befb88276457079d0ed98ee949"
+  },
+  ".agents/templates/REVIEW.md": {
+    "bytes": 306,
+    "lines": 23,
+    "sha256": "14ad1c2a69e36957bdf4c87d2a3ed5b3f6cd5859bb267bd39971ffed3b803898"
+  },
+  ".agents/templates/TASK.md": {
+    "bytes": 461,
+    "lines": 42,
+    "sha256": "bf826cdf126aa34c28b5dec5e0362f55eee82e68a1806399bcfb889c3fab0e07"
+  },
+  "AGENTS.md": {
+    "bytes": 6056,
+    "lines": 168,
+    "sha256": "44e3e408c5cccfe2024a319e080aa26661104b3dcd14073689b8547379ebaa9f"
+  },
+  "PROJECT.example.md": {
+    "bytes": 888,
+    "lines": 42,
+    "sha256": "75fae0f4dc4970d409a60043cd78b07341a8b0902eefedb49e457ceeab57e322"
+  },
+  "README.md": {
+    "bytes": 1655,
+    "lines": 61,
+    "sha256": "3a6735a50bb5ec61a8abfd76d84413cd761c160c56e14aa08f6d16f72106bbd4"
+  },
+  "examples/backend/AGENTS.md": {
+    "bytes": 460,
+    "lines": 13,
+    "sha256": "5da04cbf73c1d1988027c41ddc650026a364a7a76a66c8b8d167109fda026f21"
+  },
+  "examples/database/AGENTS.md": {
+    "bytes": 379,
+    "lines": 9,
+    "sha256": "2df9f51104d73f468aa0f92e4ee48155922a717d681ff3729862cce4e48c73c7"
+  },
+  "examples/ml/AGENTS.md": {
+    "bytes": 369,
+    "lines": 9,
+    "sha256": "534e45bcbc78c357c01d70f9bff9c0296c83710c232b7635a611f1d55f9cef4e"
+  }
+}
