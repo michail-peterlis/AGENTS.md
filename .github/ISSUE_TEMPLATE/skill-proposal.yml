@@ -1,0 +1,32 @@
+name: Skill proposal
+description: Propose a just-in-time workflow skill.
+title: "SKILL: "
+labels: ["SKILL"]
+body:
+  - type: textarea
+    id: trigger
+    attributes:
+      label: Trigger condition
+      description: When should agents load this skill?
+    validations:
+      required: true
+  - type: textarea
+    id: workflow
+    attributes:
+      label: Workflow
+      description: Describe the steps the skill should prescribe.
+    validations:
+      required: true
+  - type: textarea
+    id: io
+    attributes:
+      label: Expected inputs and outputs
+    validations:
+      required: true
+  - type: textarea
+    id: jit
+    attributes:
+      label: Why just-in-time instead of policy
+      description: Why should this not be always loaded as a policy or root rule?
+    validations:
+      required: true

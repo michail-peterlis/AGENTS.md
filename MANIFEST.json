@@ -5,9 +5,9 @@
     "sha256": "369ce6d5c47b6a9e19634d29f9f38a14787294e492079f11100b488fabd58cff"
   },
   ".agents/README.md": {
-    "bytes": 1529,
-    "lines": 53,
-    "sha256": "8d2a427d7f6c05e5e719840365afde28558e8f0b962c5810450850be8f3d37d8"
+    "bytes": 1731,
+    "lines": 57,
+    "sha256": "541d72e4cf75a7fdcec5b1442af0f816bcaa0c8bd5c1491a10c66c8e47d7d6ea"
   },
   ".agents/policies/completion.md": {
     "bytes": 626,
@@ -110,9 +110,9 @@
     "sha256": "0654256aef29c71dcfbdefde20fb97c959b11b365f6f01c279e524c64b4bfa9f"
   },
   ".agents/roles/repository-manager.md": {
-    "bytes": 666,
-    "lines": 18,
-    "sha256": "03f523e0fdd527c42cf1cf27d823971282cb7d6bb9b0fc16041dfabece1cd6e4"
+    "bytes": 1315,
+    "lines": 35,
+    "sha256": "c31ebceac472a0a9ddef6ab5a62f24fe9a0f7c5ead6f1af6199e3990d9303e59"
   },
   ".agents/roles/research-ml.md": {
     "bytes": 763,
@@ -174,10 +174,70 @@
     "lines": 42,
     "sha256": "bf826cdf126aa34c28b5dec5e0362f55eee82e68a1806399bcfb889c3fab0e07"
   },
+  ".github/ISSUE_TEMPLATE/bug.yml": {
+    "bytes": 1079,
+    "lines": 36,
+    "sha256": "bb0a461e8f8a4e26c0ebd91c9af671a258276990796b94b76c08236fa7641d33"
+  },
+  ".github/ISSUE_TEMPLATE/compatibility.yml": {
+    "bytes": 1345,
+    "lines": 60,
+    "sha256": "fc3c5e13df40e8c00ca3187d2d9ee27d0362989becb3247326f36b04b2e33cf5"
+  },
+  ".github/ISSUE_TEMPLATE/config.yml": {
+    "bytes": 27,
+    "lines": 1,
+    "sha256": "13064e7bea658e01e718b414fbb7b3b244f36411fe25ee2055c151f7b534547a"
+  },
+  ".github/ISSUE_TEMPLATE/policy-proposal.yml": {
+    "bytes": 867,
+    "lines": 36,
+    "sha256": "4cd20b58874a26a20a64aa043e59f3f7a60094daf3ca084266188c2f37eb6972"
+  },
+  ".github/ISSUE_TEMPLATE/role-proposal.yml": {
+    "bytes": 1134,
+    "lines": 44,
+    "sha256": "f0dfef6f0a373eff1658ab747da8c9436ee4a33b642b74d6d2d5341b007d0891"
+  },
+  ".github/ISSUE_TEMPLATE/skill-proposal.yml": {
+    "bytes": 807,
+    "lines": 32,
+    "sha256": "dded15039cbdfbcf22dd599dd8aa476fbe4b7b945f783059058db62e11eb1bc9"
+  },
+  ".github/pull_request_template.md": {
+    "bytes": 781,
+    "lines": 38,
+    "sha256": "61b1e4196e737653d8d5618ade623f01d6c5d6ba3734e8d0e4d9b824ae3f2611"
+  },
   "AGENTS.md": {
-    "bytes": 6056,
-    "lines": 168,
-    "sha256": "44e3e408c5cccfe2024a319e080aa26661104b3dcd14073689b8547379ebaa9f"
+    "bytes": 6301,
+    "lines": 173,
+    "sha256": "4a90f648bc450a3f28b132e54b8bcf28474cb3cabd89798ce3922111ab50eb48"
+  },
+  "CHANGELOG.md": {
+    "bytes": 837,
+    "lines": 20,
+    "sha256": "ca8c6da03bbeb6f35b4c1de495c108e5a699936e8df4230dbe940fbbe319ca02"
+  },
+  "CODE_OF_CONDUCT.md": {
+    "bytes": 940,
+    "lines": 25,
+    "sha256": "e78eea8e6a9248868b2fc8ca278bd4ae70665b48a3068ed7ce2a64de656ae9e5"
+  },
+  "CONTRIBUTING.md": {
+    "bytes": 2681,
+    "lines": 71,
+    "sha256": "91d1d5aa32a1b1cc4e1c1c812817f8790961b34b0e870b7e23d205f24406a23a"
+  },
+  "LICENSE": {
+    "bytes": 1073,
+    "lines": 21,
+    "sha256": "0f7e8b4398d98397e3c5eaedf01a087ccbad6e6160224a9f0d56629ca5323af9"
+  },
+  "MANIFEST.json": {
+    "bytes": 8544,
+    "lines": 272,
+    "sha256": "fe5a7b1647e60de32fda48b5252b6aef44a69d16d30c329c63337ac319130252"
   },
   "PROJECT.example.md": {
     "bytes": 888,
@@ -185,9 +245,14 @@
     "sha256": "75fae0f4dc4970d409a60043cd78b07341a8b0902eefedb49e457ceeab57e322"
   },
   "README.md": {
-    "bytes": 1655,
-    "lines": 61,
-    "sha256": "3a6735a50bb5ec61a8abfd76d84413cd761c160c56e14aa08f6d16f72106bbd4"
+    "bytes": 4581,
+    "lines": 155,
+    "sha256": "2b16413d4dc0e88b1c72869fc0c93436ae86f3b11e28edf717e30b4ab5e86e8f"
+  },
+  "SECURITY.md": {
+    "bytes": 875,
+    "lines": 20,
+    "sha256": "7b741fff3a36a504d3502e65be4f5a44077eb5c55e061e4f3a92dbe5bed86a63"
   },
   "examples/backend/AGENTS.md": {
     "bytes": 460,

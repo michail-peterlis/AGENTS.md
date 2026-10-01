@@ -1,0 +1,44 @@
+name: Role proposal
+description: Propose a new or changed agent role.
+title: "ROLE: "
+labels: ["ROLE"]
+body:
+  - type: textarea
+    id: responsibility
+    attributes:
+      label: Role responsibility
+      description: What is this role responsible for?
+    validations:
+      required: true
+  - type: textarea
+    id: authority
+    attributes:
+      label: Authority
+      description: What decisions or edits may this role make?
+    validations:
+      required: true
+  - type: textarea
+    id: tools
+    attributes:
+      label: Required tools
+      description: What tools or repository access does this role need?
+  - type: textarea
+    id: forbidden
+    attributes:
+      label: Forbidden actions
+      description: What must this role not do?
+    validations:
+      required: true
+  - type: textarea
+    id: overlap
+    attributes:
+      label: Overlap with existing roles
+      description: Which existing roles overlap, and why are they insufficient?
+    validations:
+      required: true
+  - type: textarea
+    id: necessity
+    attributes:
+      label: Why a separate role is necessary
+    validations:
+      required: true

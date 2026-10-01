@@ -2,6 +2,11 @@
 
 Universal rules only. Detailed instructions are loaded just in time.
 
+This file is the AGENTS.md compatibility layer. The `.agents/` tree is an
+opinionated framework extension, not part of the core AGENTS.md convention;
+load it only as directed here, by the active task, or by explicit harness
+configuration.
+
 ## Instruction loading
 
 Every agent reads this file, then only:

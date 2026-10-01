@@ -1,0 +1,36 @@
+name: Policy proposal
+description: Propose a reusable cross-cutting engineering policy.
+title: "POLICY: "
+labels: ["POLICY"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Engineering problem
+    validations:
+      required: true
+  - type: textarea
+    id: rule
+    attributes:
+      label: Proposed rule
+    validations:
+      required: true
+  - type: textarea
+    id: insufficiency
+    attributes:
+      label: Why existing policies are insufficient
+    validations:
+      required: true
+  - type: textarea
+    id: context_cost
+    attributes:
+      label: Expected context cost
+      description: Does this increase always-loaded context, or is it loaded only when relevant?
+    validations:
+      required: true
+  - type: textarea
+    id: failure
+    attributes:
+      label: Example failure prevented
+    validations:
+      required: true

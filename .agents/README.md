@@ -3,6 +3,10 @@
 This directory contains task-selective instructions. The root `AGENTS.md` is the
 only file every agent must always read.
 
+The `.agents/` layout is an opinionated Enterprise Agents extension around the
+AGENTS.md convention. Do not assume every agent platform discovers it without
+root-file routing or harness configuration.
+
 ## Mental model
 
 - **Role** — who am I?

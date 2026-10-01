@@ -1,0 +1,60 @@
+name: Agent/platform compatibility
+description: Report behavior for a coding-agent platform or harness.
+title: "COMPAT: "
+labels: ["COMPAT"]
+body:
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Agent/platform
+      options:
+        - Codex
+        - Claude Code
+        - Gemini CLI
+        - GitHub Copilot
+        - other
+    validations:
+      required: true
+  - type: textarea
+    id: supported
+    attributes:
+      label: Supported behavior
+    validations:
+      required: true
+  - type: textarea
+    id: unsupported
+    attributes:
+      label: Unsupported behavior
+    validations:
+      required: true
+  - type: textarea
+    id: adapter
+    attributes:
+      label: Required adapter/configuration
+      description: Note any prompts, settings, scripts, or manual routing required.
+  - type: dropdown
+    id: nested_agents
+    attributes:
+      label: Are nested AGENTS.md files honored?
+      options:
+        - "yes"
+        - "no"
+        - partial
+        - unknown
+    validations:
+      required: true
+  - type: dropdown
+    id: tool_restrictions
+    attributes:
+      label: Are tool restrictions enforceable?
+      options:
+        - "yes"
+        - "no"
+        - partial
+        - unknown
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes and evidence

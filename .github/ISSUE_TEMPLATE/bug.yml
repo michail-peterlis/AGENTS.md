@@ -1,0 +1,36 @@
+name: Bug report
+description: Report a contradiction, failure, ambiguity, or incorrect rule.
+title: "BUG: "
+labels: ["BUG"]
+body:
+  - type: textarea
+    id: affected
+    attributes:
+      label: Affected file or rule
+      description: Identify the file, section, or rule involved.
+    validations:
+      required: true
+  - type: textarea
+    id: observed
+    attributes:
+      label: Observed contradiction or failure
+      description: What happened or what appears inconsistent?
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: What should the framework say or cause agents to do instead?
+    validations:
+      required: true
+  - type: input
+    id: platform
+    attributes:
+      label: Agent/platform if relevant
+      placeholder: Codex, Claude Code, Gemini CLI, GitHub Copilot, other
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal reproduction
+      description: Provide the smallest example, prompt, repository layout, or task that shows the issue.
