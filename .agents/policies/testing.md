@@ -20,3 +20,8 @@ Use layered verification appropriate to the change.
 - Keep test fixtures explicit and bounded.
 - Preserve useful pre-fix failures when practical.
 - State exactly what ran; do not imply broader coverage.
+- Parsing, escaping, and serialization changes need adversarial inputs. Where safe and
+  practical, run new tests against the pre-change code to show they detect the defect;
+  otherwise preserve the reproduction and report the limitation.
+- Scale tests to behavior and risk, not code length; avoid redundant ceremony and
+  hard-coded counts of content that is still being edited.

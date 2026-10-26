@@ -2,6 +2,13 @@
 
 Own the quality of the verification strategy, not product implementation.
 
+## Engagement
+
+- **Activate:** a task needs a verification strategy or review of its test evidence.
+- **Inputs:** acceptance criteria, failure risks, interfaces, supported environments, and existing tests.
+- **Deliverable:** a criterion-to-evidence map with verification layers, negative cases, and uncovered scope.
+- **Escalate:** an untestable requirement, unavailable environment, or disputed failure classification.
+
 ## Responsibilities
 
 - map tests to acceptance criteria;

@@ -37,6 +37,44 @@ This project uses the open `AGENTS.md` convention for repository-level instructi
 
 Do not assume every coding-agent implementation automatically discovers `.agents/*`. Agents should load the additional files only when directed by the root `AGENTS.md`, a task, or project-specific harness configuration.
 
+## Harness independence
+
+The framework is written to be portable across agent harnesses. Roles, policies,
+skills, and templates state intent and outcomes, not harness tools or features.
+
+- Verify the capabilities your harness actually has. Where a rule relies on one it
+  lacks (background watching, permission prompts, question dialogs, subagents, file
+  locks), use the stated fallback and say so; if no safe fallback exists, report
+  BLOCKED. Fallbacks never bypass safety rules.
+- Do not claim isolation or per-agent permission limits (for example, a read-only
+  reviewer) unless the harness enforces them and you have verified it.
+- Verify that your harness actually loads the root `AGENTS.md`. Some harnesses read a
+  differently named instruction file by default; point it at `AGENTS.md` with the
+  harness's own import or configuration mechanism instead of copying rules.
+- Keep harness-specific notes in the project extension (`PROJECT.md`) or
+  compatibility issues, never in roles, policies, skills, or templates.
+
+## Using the kit with your agents
+
+A **role** defines responsibility and authority; a **skill** is a reusable procedure
+loaded for a particular task. The adopting project chooses whether its agents run
+in one session, separate sessions, or delegated subagents. All use the same scoped
+instruction files; this kit does not launch agents, install adapters, or enforce a
+sandbox. A different model or context does not by itself make a review independent.
+
+The optional [multi-agent workflow](.agents/skills/multi-agent-workflow/SKILL.md) is a
+generic procedure for an adopter's agents, not an orchestration program. Use only
+the roles the task needs and verify the chosen execution capabilities.
+
+Keep the discussion in a human-readable file under `.agents/workspace/<task>/`, such as
+`chat.md`. Git ignores the folder by default, so conversations do not clutter your
+repository; outcomes that must outlast a task get a durable record where you approve.
+Runtime messaging may improve delivery speed, but delegated tasks, public replies, objections, decisions
+and outcomes must still be recorded in files. Large reports may be linked rather
+than copied through every context. See the [CHAT template](.agents/templates/CHAT.md).
+Maintainers can use the [manual review scenarios](docs/review-scenarios.md) when
+reviewing changes to this kit.
+
 ## Core model: progressive context loading
 
 Agents should normally read only:
@@ -52,62 +90,60 @@ Agents must not preload every role, policy, skill, or historical document.
 
 ## Quick start
 
-1. Copy `AGENTS.md` and `.agents/` into your repository.
-2. Fill in repository-specific build/test commands in `AGENTS.md`.
-3. Select the roles your project uses.
-4. Add nested `AGENTS.md` files for major components.
-5. Customize project coordination and completion authority.
+1. Copy `AGENTS.md` and `.agents/` into your repository, keeping the `LICENSE` notice
+   with them. If the repository already has an `AGENTS.md`, merge the kit into it
+   instead of replacing it; never discard existing project instructions.
+2. Fill in the "Project commands" section of `AGENTS.md`.
+3. Assign the roles your project uses.
+4. Add nested `AGENTS.md` files for major components (see `docs/examples/`).
+5. When project context is needed (coordination, completion authority, environment,
+   protected paths), create `PROJECT.md` from `.agents/templates/PROJECT.md`.
 
-Optional: copy `PROJECT.example.md` into project-specific documentation and adapt the examples under `examples/`.
+## What to copy
 
-## Adoption levels
+Copy `AGENTS.md` and `.agents/`, with the `LICENSE` notice. Nothing in them has to be
+deleted before use:
 
-### Minimal
+- roles, policies, and skills are meant to load only when assigned or needed; what an
+  unused one costs depends on the adopting runtime (some index skill descriptions), and
+  removing it is optional;
+- `.agents/templates/` is not part of the loading order; its templates are used only
+  when your project first creates a file such as `PROJECT.md`, a project skill, a task,
+  or a review;
+- `.agents/.gitignore` makes Git ignore `.agents/workspace/` by default; agents create
+  the folder when they first need it, and your repository's `.gitignore` needs no change.
 
-```text
-AGENTS.md
-```
+Copy from a release package or a clean checkout of the kit; for example,
+`git archive HEAD AGENTS.md .agents | tar -x -C <target>` copies only tracked kit files.
+A plain file copy of any working tree with a populated `.agents/workspace/`, including
+this repository's, also copies that workspace; exclude `.agents/workspace/` when copying.
 
-Use this when you only want core repository rules and compatibility with the AGENTS.md convention.
+Everything else in this repository maintains the kit and is not copied: `README.md`,
+`CONTRIBUTING.md`, `CHANGELOG.md`, `docs/`, `.github/`, `SECURITY.md`, and `.gitignore`.
 
-### Standard
+## Updating the kit
 
-```text
-AGENTS.md
-.agents/roles/
-.agents/policies/
-```
-
-Recommended default for teams that want explicit responsibilities and reusable engineering guardrails.
-
-### Full
-
-```text
-AGENTS.md
-.agents/
-examples/
-templates/
-plans
-skills
-```
-
-Use this when you want the complete governance framework, reusable workflows, templates, and examples.
+Replace kit files with the new release while keeping your project's own content: the
+"Project commands" section of `AGENTS.md`, `PROJECT.md`, nested `AGENTS.md` files,
+project skills, and `.agents/workspace/`. To see what changed between versions, compare
+the release packages or run `git diff <old-tag> <new-tag> -- AGENTS.md .agents`; never
+overwrite files you changed without reviewing the difference.
 
 ## Repository layout
 
 ```text
 enterprise-agents/
-├── AGENTS.md
-├── .agents/
+├── AGENTS.md          copied into adopting projects
+├── .agents/           copied into adopting projects
 │   ├── README.md
 │   ├── PLANS.md
 │   ├── roles/
 │   ├── policies/
 │   ├── skills/
-│   └── templates/
-├── examples/
-├── PROJECT.example.md
-└── MANIFEST.json
+│   ├── templates/
+│   └── .gitignore     ignores workspace/, created on first use
+├── docs/              examples and review scenarios for maintainers
+└── LICENSE            notice kept with copied files
 ```
 
 ## Contribution architecture

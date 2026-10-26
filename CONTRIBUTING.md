@@ -10,7 +10,7 @@ Use one of these categories in issues and pull requests:
 
 - `ROLE` — responsibilities, authority, and limits for a type of agent.
 - `POLICY` — reusable cross-cutting engineering rule.
-- `SKILL` — just-in-time workflow for a specific task pattern.
+- `SKILL` — just-in-time workflow for a specific task pattern; must be project-independent.
 - `TEMPLATE` — reusable task, review, handoff, or nested-instruction template.
 - `COMPAT` — compatibility notes for agent platforms or harnesses.
 - `DOC` — documentation-only improvement.
@@ -45,6 +45,16 @@ One task                  → task/plan
 
 Prefer adding or refining role, policy, skill, template, or nested instructions instead of expanding the root file.
 
+## Harness independence
+
+Roles, policies, skills, and templates must not name or depend on a specific agent
+harness, model, or tool. State the required outcome and a fallback for harnesses that
+lack the capability. Harness-specific notes belong in `COMPAT` issues or project
+extensions.
+
+When changing coordination, review, or privacy rules, re-check the
+[manual review scenarios](docs/review-scenarios.md).
+
 ## Pull requests
 
 A pull request should include:
@@ -69,3 +79,6 @@ Do not add executable tooling, package dependencies, or release automation unles
 Public releases use semantic versioning for the governance contract. Behavioral changes may be breaking even when they are Markdown-only.
 
 Do not rewrite released history or remove provenance for released decisions.
+
+Release packages contain tracked kit files only; never include `.agents/workspace/`
+content.

@@ -1,0 +1,5 @@
+# Local analysis inputs; never publish.
+/for-analysis/
+
+# claude harness lock file
+/.claude/

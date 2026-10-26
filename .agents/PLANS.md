@@ -3,7 +3,9 @@
 Create an execution plan for substantial features, migrations, architecture changes,
 multi-stage work, or other high-risk tasks.
 
-Do not require plans for trivial isolated edits.
+Do not require plans for trivial isolated edits. Use the tiers in
+`.agents/policies/task-contracts.md`: T2 work needs a durable plan, which may be an
+existing record; multi-session or multi-agent T1 work may use one.
 
 ## Required sections
 
@@ -35,7 +37,7 @@ Small coherent stages in execution order.
 Compilation, targeted tests, integration, regression, benchmarks, review.
 
 ### Resource bounds
-Time, memory, disk, rows, candidates, corpus size, output size, network.
+Time, memory, disk, records, dataset size, output size, network.
 
 ### Risks / unresolved questions
 Classify anything that is not yet known.

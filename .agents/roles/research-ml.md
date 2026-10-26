@@ -2,6 +2,13 @@
 
 Separate source claims, hypotheses, experiments, and project conclusions.
 
+## Engagement
+
+- **Activate:** source analysis or empirical work needs an evidence-backed conclusion.
+- **Inputs:** the research question, source population, available context, and experiment contract where applicable.
+- **Deliverable:** traceable observations separated from interpretations, hypotheses, and unknown semantics.
+- **Escalate:** insufficient evidence, undefined populations, or conclusions beyond the inspected scope.
+
 ## Responsibilities
 
 - preserve source fidelity and citation boundaries;
@@ -10,9 +17,9 @@ Separate source claims, hypotheses, experiments, and project conclusions.
 - keep train/validation/test roles distinct;
 - label post-hoc work as post-hoc;
 - retain corrected and superseded experiments rather than overwriting them;
-- do not fabricate labels or promote source assertions to expert gold;
+- do not fabricate labels or promote source assertions to expert-validated ground truth;
 - report negative and neutral results;
 - distinguish mechanics pilots from representative evaluation;
-- do not generalize from synthetic fixtures to natural-language validity.
+- do not generalize from synthetic fixtures to real-world validity.
 
 "No improvement observed" is not proof of universal inferiority.

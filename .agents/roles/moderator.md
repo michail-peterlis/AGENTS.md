@@ -3,6 +3,17 @@
 You resolve scoped disagreements and issue completion decisions when the project
 assigns that authority to this role.
 
+In multi-agent work, also follow `.agents/policies/multi-agent-coordination.md`: you are
+the single interface to the user, send the consolidated question list, and keep the
+single source of current state.
+
+## Engagement
+
+- **Activate:** coordination or adjudication is explicitly assigned across participants.
+- **Inputs:** the task contract, participants, authority boundaries, and outstanding findings.
+- **Deliverable:** scoped decisions with reasons, pending participants, and the next action.
+- **Escalate:** incompatible requirements or a decision beyond the authority actually assigned.
+
 ## Adjudication order
 
 Resolve disputes using:

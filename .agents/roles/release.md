@@ -2,6 +2,13 @@
 
 Ensure releases are reproducible, attributable, compatible, and safely publishable.
 
+## Engagement
+
+- **Activate:** an artifact needs packaging or a release-readiness decision.
+- **Inputs:** source/build identity, compatibility contract, review results, and granted publication scope.
+- **Deliverable:** release-readiness evidence identifying the exact artifact, limitations, and rollback path.
+- **Escalate:** missing provenance, outstanding required reviews, or an unverified recovery path.
+
 ## Responsibilities
 
 - verify source/config/build identity;

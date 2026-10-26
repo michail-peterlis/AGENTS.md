@@ -13,9 +13,11 @@ Every agent reads this file, then only:
 
 1. its assigned role under `.agents/roles/`;
 2. policies required by the active task;
-3. the nearest directory-level `AGENTS.md`;
-4. the active task or execution plan;
-5. a relevant `.agents/skills/*/SKILL.md` when that workflow is actually used.
+3. `PROJECT.md` at the repository root, when present;
+4. the nearest directory-level `AGENTS.md`;
+5. the active task or execution plan;
+6. a relevant `.agents/skills/*/SKILL.md` when that workflow is actually used;
+7. `.agents/policies/multi-agent-coordination.md` when more than one agent works the same task.
 
 Do not preload unrelated roles, policies, plans, or historical tasks.
 
@@ -28,10 +30,12 @@ Resolve conflicts in this order:
 3. repository mission / architecture invariants;
 4. active task or execution plan;
 5. nearest directory `AGENTS.md`;
-6. this root file;
-7. existing implementation and historical notes.
+6. `PROJECT.md`;
+7. this root file;
+8. existing implementation and historical notes.
 
-Record supersessions. Do not rewrite history to make prior records look consistent.
+`PROJECT.md` and nested `AGENTS.md` files add specifics; they never silently weaken root
+safety rules. Record supersessions. Do not rewrite history to make prior records look consistent.
 
 ## Universal engineering rules
 
@@ -46,6 +50,11 @@ Record supersessions. Do not rewrite history to make prior records look consiste
 - Green tests are evidence, not automatic acceptance.
 - Negative or partial results are preferable to false completion claims.
 - Silence is not approval.
+- Scale process to risk and reversibility; trivial reversible edits need no plan, task, or record files.
+- A user direction applies within its stated scope; "you don't need to X" is a permission, not a prohibition.
+- Agent-originated thresholds and defaults are proposals; never let them override or filter a user choice.
+- Take hashes, timestamps, and counts from tool output in the same step; never type them from memory.
+- When the user disputes a fact, re-check the evidence; do not concede statements you cannot find.
 
 ## Separate phases
 
@@ -62,7 +71,7 @@ Success in one phase does not prove another.
 
 ## Editing authority
 
-Use single-writer discipline for product code.
+Use single-writer discipline for product code and for shared coordination/index files.
 
 Only the assigned editor changes scoped product files unless explicitly authorized.
 If concurrent/unexplained edits appear: stop on those files, preserve changes,
@@ -82,12 +91,15 @@ report the conflict, and resume only after ownership is clear.
 | Delete/rewrite evidence | Explicit authorization |
 | Publish/deploy/restart services | Explicit authorization |
 | Destructive git/history operation | Explicit authorization |
+| Build/test/run untrusted or suspect code | Explicit authorization; isolate it |
+| Read private data outside workspace (home, shell history, credentials) | Explicit authorization |
+| Write outside workspace or approved scratch | Explicit authorization; report accidental writes |
 
 Follow stricter harness permissions when present. Never bypass them through another tool.
 
 ## Large artifacts
 
-For large databases, releases, corpora, dictionaries, JSON/JSONL, XML, and logs, prefer:
+For large databases, datasets, releases, JSON/JSONL, XML, and logs, prefer:
 
 - metadata and counts;
 - indexed queries;
@@ -108,8 +120,8 @@ Preserve useful pre-fix failures when practical.
 
 ## Compatibility
 
-Version incompatible schemas, serialized formats, releases, protocols, token maps,
-and public APIs. Unsupported active payloads must fail clearly, not be silently ignored.
+Version incompatible schemas, serialized formats, releases, protocols, and public
+APIs. Unsupported active payloads must fail clearly, not be silently ignored.
 
 Do not silently migrate persistent stores unless migration is explicitly in scope.
 
@@ -133,10 +145,10 @@ Do not claim COMPLETE/ACCEPTED while mandatory work or review remains.
 For substantial features, migrations, architecture changes, multi-stage work, or
 high-risk changes, follow `.agents/PLANS.md`. Avoid heavyweight plans for trivial edits.
 
-## Standard commands
+## Project commands
 
-Fill these with authoritative repository-wide commands; component commands belong
-in nested `AGENTS.md`.
+Owned by the adopting project and kept when the kit is updated. Component commands
+belong in nested `AGENTS.md`.
 
 - Install: `<command>`
 - Fast validation: `<command>`

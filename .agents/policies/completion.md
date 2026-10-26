@@ -20,3 +20,8 @@ Before completion, confirm as applicable:
 - designated completion authority issued a decision.
 
 If required work remains, the task is not COMPLETE.
+
+A request to "finish" does not waive gates; report what remains.
+
+Hand-patched generated output is not complete: label the patch and keep regeneration
+REQUIRED.
