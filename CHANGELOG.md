@@ -17,6 +17,7 @@ This project uses semantic versioning for the governance contract. Behavioral ch
 - `docs/review-scenarios.md`: manual review scenarios for maintainers.
 - `.agents/workspace/` for local coordination records, kept out of version control by `.agents/.gitignore` and created on first use; outcomes that must outlast a task get a tracked record with the user's approval.
 - `.gitignore` for local analysis inputs.
+- Release workflow (`.github/workflows/release.yml`): packages the committed `AGENTS.md` and `.agents/` of one commit plus the license notice, with a `.sha256` file; an optional minimal edition is packaged from the `lite` branch, and CONTRIBUTING describes a `main` ruleset to set up against merging it.
 
 ### Changed
 
@@ -29,14 +30,15 @@ This project uses semantic versioning for the governance contract. Behavioral ch
 - Wording specific to the framework's original project generalized in root `AGENTS.md`, `PLANS.md`, and the evidence, versioning, data, and research files.
 - README adoption levels replaced by one copy set; `examples/` moved to `docs/examples/`.
 - Coordination policy, CHAT and HUMAN-QUESTIONS templates, PROJECT template, and README point coordination files to `.agents/workspace/`.
-- `.agents/README.md`: kit skills versus project skills, and instructions versus execution.
-- `CONTRIBUTING.md`: harness independence, project-independent skills, review scenarios, and workspace exclusion from releases.
+- `CONTRIBUTING.md`: harness independence, project-independent skills, review scenarios, workspace exclusion from releases, and the release process with `lite` branch conventions and the `main` ruleset.
+- README: release packages and project-skill guidance.
 
 ### Removed
 
 - `PROJECT.example.md` (now `.agents/templates/PROJECT.md`).
 - `MANIFEST.json`; Git history identifies file contents, and release checksums belong with release packages.
 - `CODE_OF_CONDUCT.md`.
+- `.agents/README.md`; its guidance is in `README.md` and the policy files.
 
 ### Notes
 

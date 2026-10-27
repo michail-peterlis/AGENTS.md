@@ -66,7 +66,9 @@ A pull request should include:
 - compatibility impact;
 - evidence or examples where useful.
 
-Do not add executable tooling, package dependencies, or release automation unless explicitly discussed and accepted first.
+The only executable tooling is the release workflow (`.github/workflows/release.yml`).
+Do not add other tooling or package dependencies unless explicitly discussed and
+accepted first.
 
 ## Issues vs discussions
 
@@ -82,3 +84,37 @@ Do not rewrite released history or remove provenance for released decisions.
 
 Release packages contain tracked kit files only; never include `.agents/workspace/`
 content.
+
+## Releases
+
+Releases are built by the manually started **Release** workflow, run from `main`. It
+packages the committed `AGENTS.md` and `.agents/` of one commit with `git archive`,
+adds the license notice as `.agents/LICENSE`, and attaches a `.sha256` file.
+
+1. Move the `[Unreleased]` entries in `CHANGELOG.md` under `## [vX.Y.Z] - YYYY-MM-DD`
+   and push to `main`.
+2. Run the workflow with `version: vX.Y.Z` and `source: main`. It creates the tag and
+   the release, with `agents-kit-vX.Y.Z.zip` and its `.sha256` file.
+3. Optional minimal edition: update the `lite` branch, then run the workflow with
+   `source: lite`. It adds `agents-kit-lite-vX.Y.Z.zip` to the same release.
+
+### The `lite` branch
+
+`lite` holds only `AGENTS.md` and `.agents/` (including `.agents/.gitignore`),
+condensed for small context windows. Condensing may shorten wording and merge files,
+but must not drop safety or acceptance rules. End each `lite` commit message with a
+`Derived-from: <main commit>` line; the workflow warns when `main` has changed since.
+
+Create `lite` once, without shared history, in its own folder so untracked files of
+your `main` checkout cannot be added to it:
+
+```sh
+git worktree add --orphan -b lite ../agents-lite
+```
+
+Protect `main` with a branch ruleset (Settings → Rules → Rulesets → New branch ruleset,
+targeting the default branch) that enables **Require linear history** and **Block
+force pushes**. Together with the unrelated histories, this blocks ordinary pull
+requests and merge commits from `lite` into `main`. It does not stop copying,
+cherry-picking, or squashing `lite` content into `main`, or anyone allowed to bypass
+the ruleset.
