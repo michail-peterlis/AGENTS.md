@@ -13,8 +13,10 @@ Before substantive work, record:
 - what agent consensus requires for this task.
 
 Each agent picks a short, playful name for itself, such as "Disco Llama" or "Captain
-Quokka", unique within the task. Use it in every message, never a harness, model, or
-vendor name.
+Quokka", unique within the task, and uses it as its speaker label in coordination
+messages instead of a harness, model, or vendor name. The name is not attribution:
+it never goes into commits, pull requests, or other published text, and it is not a
+git identity.
 
 If the user has not named a coordinator, ask once. If the user delegates the choice,
 the agents may agree on one and record it. Never assume completion authority.
