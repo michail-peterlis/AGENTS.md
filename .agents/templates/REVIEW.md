@@ -1,35 +1,12 @@
-# Review
+# Review: <artifact path + hash or revision>
 
-Task / stage / revision:
-Reviewer / implementation author:
-Required reviewers:
-
-## Scope reviewed
-- Artifact identity (path + hash or revision):
-- ...
-
-## Independent verification
 - Commands run (OBSERVED):
-- Negative / hostile probes:
-- Warnings and errors seen:
-- Taken from others, not re-run (REPORTED):
+- Hostile probes:
+- Warnings and errors:
+- From others (REPORTED):
 - Not checked:
 
-## Findings
+## F1: <class>
+Claim · Evidence · Impact · Resolution condition
 
-### F1 — <classification>
-**Claim/change:**  
-**Evidence:**  
-**Impact:**  
-**Resolution condition:**  
-
-## Completion classification
-- Accepted:
-- Required:
-- Deferred:
-- Out of scope:
-- Unresolved:
-- Role verdict (ACCEPT / HOLD / AMEND):
-- Required reviewer decisions still pending:
-- Completion authority / decision, if recorded:
-- Task status (root vocabulary; do not infer acceptance):
+Verdict: ACCEPT / HOLD / AMEND on <artifact>. Pending: <roles, user decision>

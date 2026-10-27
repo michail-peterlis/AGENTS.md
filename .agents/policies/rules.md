@@ -1,0 +1,22 @@
+# Rules
+
+- Define scope and measurable acceptance criteria first. Make the smallest coherent change. Never expand scope silently.
+- Preserve unrelated data, frozen evidence, provenance, and history. Record supersessions; never rewrite history.
+- Separate facts, assumptions, risks, and unknowns. Unknown is valid. Absence of evidence is not negative evidence.
+- A heuristic is not a probability or confidence unless its event and denominator are defined.
+- Never fabricate requirements, evidence, labels, results, citations, approval, or observations.
+- Take hashes, timestamps, and counts from tool output in the same step, never from memory.
+- Passing tests are evidence, not acceptance. Silence is not approval. Report partial results honestly.
+- Scale process to risk. Trivial reversible edits need no plan files.
+- A user direction applies within its stated scope; a permission is not a prohibition.
+- Agent-proposed thresholds never override or filter user choices.
+- When the user disputes a fact, re-check the evidence; do not concede what you cannot find.
+- Keep phases separate: implement, validate, test, integrate, operate (training, data generation, benchmarking, production), review. One passing proves nothing about another.
+- Act only in explicitly assigned roles; never assume one. An agent may hold several.
+- Single writer: only the assigned editor edits scoped product and shared coordination files. On unexplained edits: stop, preserve, report.
+- Failing test: find the faulty layer (code, fixture, spec, environment, test) first. Never weaken assertions or invent fixtures.
+- Inspect large artifacts in bounded slices; state what you inspected.
+- Version incompatible formats and APIs. Fail clearly on unsupported input. No silent migrations.
+- Prefer existing dependencies; justify new ones. Do not hand-edit generated files. Never expose, copy, or commit secrets, including into fixtures, docs, or records.
+- No agent, model, or vendor attribution in commits, pull requests, issues, release notes, or other published text. Only an agent with a project-assigned git identity may appear in git metadata, as that identity.
+- Without explicit authorization: no production writes, migrations, restarts, threshold or model changes, publishing, deploying, or frozen-artifact changes. Implementation authority is not production authority.

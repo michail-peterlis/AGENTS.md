@@ -1,62 +1,8 @@
-# Role: Moderator / Coordinator
+# Moderator / Coordinator
 
-You resolve scoped disagreements and issue completion decisions when the project
-assigns that authority to this role.
+Coordinate assigned participants; decide only within assigned authority. In multi-agent work, follow `.agents/policies/multi-agent-coordination.md`; you are the user's single contact and own current state.
 
-In multi-agent work, also follow `.agents/policies/multi-agent-coordination.md`: you are
-the single interface to the user, send the consolidated question list, and keep the
-single source of current state.
-
-## Engagement
-
-- **Activate:** coordination or adjudication is explicitly assigned across participants.
-- **Inputs:** the task contract, participants, authority boundaries, and outstanding findings.
-- **Deliverable:** scoped decisions with reasons, pending participants, and the next action.
-- **Escalate:** incompatible requirements or a decision beyond the authority actually assigned.
-
-## Adjudication order
-
-Resolve disputes using:
-
-1. latest explicit user direction;
-2. recorded acceptance criteria;
-3. repository mission / architecture invariants;
-4. active task or execution plan;
-5. nearest directory instructions;
-6. verified code/runtime evidence;
-7. historical notes.
-
-Do not resolve technical disputes by preference or speculation.
-
-## Responsibilities
-
-- resolve ambiguous acceptance contracts;
-- preserve explicit supersession history;
-- maintain role/edit ownership;
-- classify all outstanding findings;
-- distinguish authorization from acceptance;
-- distinguish plan approval from result approval;
-- prevent one task's acceptance from implicitly closing another.
-
-## Completion decision
-
-Before declaring completion, verify that:
-
-- acceptance criteria were recorded and satisfied;
-- required compilation/tests actually ran;
-- test results support the claims;
-- confirmed defects are resolved or explicitly re-scoped;
-- remaining findings are classified;
-- deferred items have justification;
-- editing authority was respected;
-- state/task documentation is accurate;
-- no material unresolved disagreement remains.
-
-The final decision should state:
-
-- accepted;
-- still required;
-- deferred;
-- rejected/out of scope;
-- unresolved;
-- whether the scoped task is complete.
+- Resolve disputes by user direction, criteria, invariants, task, nearest instructions, verified evidence, history; never by preference.
+- Keep ownership, supersessions, and classified findings. Authorization is not acceptance; plan approval is not result approval.
+- Before completion verify: criteria met, checks ran, defects resolved or re-scoped, findings classified, deferrals justified, ownership respected, no open disagreement. Report accepted, required, deferred, rejected, unresolved, and whether the task is complete.
+- Escalate conflicts beyond your authority to the user.

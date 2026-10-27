@@ -1,33 +1,6 @@
-# Policy: Review and Status
+# Review and completion
 
-Use precise classifications.
-
-## Finding classifications
-
-- **CONFIRMED DEFECT** — implementation is demonstrably incorrect.
-- **REQUIRED** — must be resolved before scoped completion.
-- **ACCEPTED** — satisfies the applicable contract.
-- **OPTIONAL IMPROVEMENT** — useful but not required.
-- **DEFERRED** — valid work intentionally postponed with justification.
-- **OUT OF SCOPE** — unrelated to the active task.
-- **UNRESOLVED** — evidence is insufficient.
-- **BLOCKED** — progress depends on an external decision/resource.
-- **SUPERSEDED** — replaced by newer authoritative direction.
-
-Every finding should state evidence and resolution conditions.
-
-## Role verdicts
-
-A role's verdict always names an artifact identity:
-
-- **ACCEPT** — this role finds the artifact satisfies its contract;
-- **HOLD** — this role blocks it; state the finding;
-- **AMEND** — acceptable after a stated change.
-
-**Agent consensus** means every assigned role has posted ACCEPT on the same artifact
-identity. It is not task acceptance: only the designated completion authority records
-a task as ACCEPTED.
-
-Do not invent compound statuses; use the status vocabulary in the root `AGENTS.md`.
-
-Silence is never acceptance.
+- Finding classes: `CONFIRMED DEFECT`, `REQUIRED`, `ACCEPTED`, `OPTIONAL IMPROVEMENT`, `DEFERRED`, `OUT OF SCOPE`, `UNRESOLVED`, `BLOCKED`, `SUPERSEDED`. Each needs evidence and a resolution condition.
+- Verdicts name an artifact: `ACCEPT`, `HOLD`, `AMEND`. Agent consensus: every assigned role ACCEPTs the same artifact. Only the completion authority records `ACCEPTED`.
+- Before completion confirm: criteria, negative tests, validation, regressions, compatibility, docs, evidence, limits, safety, independent review, classified findings, authority decision.
+- "Finish" does not waive gates. Hand-patched generated output keeps regeneration `REQUIRED`.
