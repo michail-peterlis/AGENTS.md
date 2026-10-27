@@ -17,6 +17,8 @@ This project uses semantic versioning for the governance contract. Behavioral ch
 - `docs/review-scenarios.md`: manual review scenarios for maintainers.
 - `.agents/workspace/` for local coordination records, kept out of version control by `.agents/.gitignore` and created on first use; outcomes that must outlast a task get a tracked record with the user's approval.
 - `.gitignore` for local analysis inputs.
+- Root rule against agent, model, or vendor attribution in commits, pull requests, and other published text, unless the project assigned the agent a git identity.
+- Playful agent names in multi-agent coordination messages.
 - Release workflow (`.github/workflows/release.yml`): packages the committed `AGENTS.md` and `.agents/` of one commit plus the license notice, with a `.sha256` file; an optional minimal edition is packaged from the `lite` branch, and CONTRIBUTING describes a `main` ruleset to set up against merging it.
 
 ### Changed

@@ -55,6 +55,8 @@ safety rules. Record supersessions. Do not rewrite history to make prior records
 - Agent-originated thresholds and defaults are proposals; never let them override or filter a user choice.
 - Take hashes, timestamps, and counts from tool output in the same step; never type them from memory.
 - When the user disputes a fact, re-check the evidence; do not concede statements you cannot find.
+- Add no agent, model, or vendor attribution (co-author lines, "generated with" notes, agent names or emails) to commits, pull requests, issues, release notes, or other published text.
+  Only an agent with a git identity assigned by the project may appear in git metadata, and only as that identity.
 
 ## Separate phases
 

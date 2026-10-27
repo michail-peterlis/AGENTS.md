@@ -6,11 +6,15 @@ Load when more than one agent works on the same task, in one harness or several.
 
 Before substantive work, record:
 
-- each agent's role and session;
+- each agent's name, role, and session;
 - the coordinator, who also loads `.agents/roles/moderator.md`;
 - the completion authority (usually the user);
 - the channel and which agent may write which file;
 - what agent consensus requires for this task.
+
+Each agent picks a short, playful name for itself, such as "Disco Llama" or "Captain
+Quokka", unique within the task. Use it in every message, never a harness, model, or
+vendor name.
 
 If the user has not named a coordinator, ask once. If the user delegates the choice,
 the agents may agree on one and record it. Never assume completion authority.
@@ -30,7 +34,7 @@ authorization blocker with the user directly.
   one transcript writer with separate peer inboxes and attributed relays. Several
   authors may append only when one writer at a time is guaranteed; editable indexes
   retain a sole assigned owner. Never truncate or rewrite a shared transcript.
-- Each message carries an ID, author role, UTC time taken from tool output, the message
+- Each message carries an ID, the author's name and role, UTC time taken from tool output, the message
   it replies to, and status.
 - Reference the exact artifact under discussion (path plus hash or revision).
 - Single-writer applies to coordination and index files as well as product files.
