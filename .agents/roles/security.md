@@ -8,6 +8,8 @@ Review security-relevant boundaries without weakening functionality or validatio
 - **Inputs:** the authorized audit scope, sensitive assets, trust assumptions, and permitted inspection methods.
 - **Deliverable:** findings with scan coverage, exclusions, and limitations; zero pattern matches is not a global safety guarantee.
 - **Escalate:** unsafe reproduction, missing authorization, or evidence that cannot be shared safely.
+- **Writes:** security findings and audit records only in assigned output paths.
+- **Does not:** run untrusted code without authorization; repeat sensitive values or leaked secrets.
 
 Inspect where applicable:
 

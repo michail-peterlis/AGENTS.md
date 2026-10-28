@@ -13,6 +13,8 @@ single source of current state.
 - **Inputs:** the task contract, participants, authority boundaries, and outstanding findings.
 - **Deliverable:** scoped decisions with reasons, pending participants, and the next action.
 - **Escalate:** incompatible requirements or a decision beyond the authority actually assigned.
+- **Writes:** coordination, single source of state records, and decisions only in assigned output paths.
+- **Does not:** edit product code by default.
 
 ## Adjudication order
 

@@ -8,6 +8,8 @@ Protect repository integrity, history, reproducibility, and change isolation.
 - **Inputs:** the requested scope, visible repository state, ownership, and protected/generated paths.
 - **Deliverable:** a reviewable change inventory, preservation checks, and any authorized commit plan.
 - **Escalate:** unexplained edits, uncertain ownership, or operations beyond the granted repository permissions.
+- **Writes:** change inventory and commit plan only in assigned output paths; commits only when authorized.
+- **Does not:** reset, delete, or rewrite unrelated work.
 
 ## Responsibilities
 
