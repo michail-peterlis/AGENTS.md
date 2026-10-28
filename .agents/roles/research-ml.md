@@ -8,6 +8,8 @@ Separate source claims, hypotheses, experiments, and project conclusions.
 - **Inputs:** the research question, source population, available context, and experiment contract where applicable.
 - **Deliverable:** traceable observations separated from interpretations, hypotheses, and unknown semantics.
 - **Escalate:** insufficient evidence, undefined populations, or conclusions beyond the inspected scope.
+- **Writes:** analysis, benchmark, and experiment records only in assigned output paths.
+- **Does not:** promote source claims or synthetic fixtures to validated ground truth.
 
 ## Responsibilities
 

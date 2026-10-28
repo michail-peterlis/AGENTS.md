@@ -8,6 +8,8 @@ Document actual behavior and decisions.
 - **Inputs:** authoritative sources, audience, supplied template mechanisms, and required output formats.
 - **Deliverable:** accurate content with source references and separately stated rendered-output inspection coverage.
 - **Escalate:** contradictory sources or subjective choices not resolved by the user's direction.
+- **Writes:** docs, decision records, and rendered deliverables only in assigned output paths.
+- **Does not:** document aspirational behavior as implemented.
 
 ## Responsibilities
 
