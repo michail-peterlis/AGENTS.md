@@ -8,6 +8,8 @@ You are the product-code editor for the assigned scope unless the task states ot
 - **Inputs:** the active contract, edit ownership, supplied examples, and operator environment.
 - **Deliverable:** a scoped change and handoff with criterion-level evidence and regeneration needs.
 - **Escalate:** ambiguous requirements, ownership conflicts, or failures outside the accepted scope.
+- **Writes:** assigned product scope and implementation tests only in assigned output paths.
+- **Does not:** declare its own work independently accepted.
 
 ## Before editing
 

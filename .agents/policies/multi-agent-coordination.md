@@ -87,18 +87,32 @@ Users often speak to whichever agent is in front of them.
 - A verdict is not an authorization.
 - Approval of a plan is not approval of its implementation.
 - A changed artifact needs fresh verdicts on the gates it affects.
+- Closure: The Moderator detects ACCEPT from every assigned role on one artifact identity,
+  posts the consolidated outcome, halts active agent polling, and hands off to the
+  completion authority. Agent consensus never closes the task by itself.
 
 ## Liveness
 
-- Poll with explicit bounds: interval and maximum wait.
-- When blocked, post BLOCKED with the item awaited and from which role, once. Then
-  tell the user which session to resume and what to send; do not repeat the request
-  at every handoff.
-- A role that others are waiting on must not hand back control without posting
-  ACCEPT, HOLD, or UNRESOLVED with a reason.
-- Review gates results, not the start of reversible work that implements explicit
-  user direction.
-- Turn-based harnesses cannot poll while idle; say so instead of implying a background watch.
+- Capability check: verify a way to wait (run a bounded command or loop) and a way to
+  read the channel. Lacking either, post BLOCKED and say so; do not imply a watch.
+- Waiting loop: after posting a message that others must answer, wait in bounded in-turn
+  calls (suggest interval ~5s, per-call max below the tool timeout, comparing against
+  the pre-read channel checksum to avoid between-call arrival races). A call ending by
+  timeout or an unrelated update is not a stop: process any actionable message and continue
+  the loop within the recorded wait budget.
+- Stop causes only: (a) consensus reached and reported; (b) user cancellation or newer
+  user direction; (c) cannot continue safely (missing capability, file error, ownership conflict).
+  On (c) post BLOCKED once with the awaited role and resume text; do not repeat the request at every handoff.
+- A role that others are waiting on must not hand back control without posting ACCEPT, HOLD, or UNRESOLVED with a reason.
+- Review gates results, not the start of reversible work that implements explicit user direction.
+- Turn-based harnesses cannot poll while idle; in-turn waiting keeps active turns live, but an
+  idle session requires user resumption.
+- Reading and message completeness: read snapshots under the agreed channel lock (where all
+  participants use the same lock), or from a committed sole transcript writer, or require an
+  explicit ID-bearing completion marker. Never infer completeness from time, size, or a stable
+  checksum alone. Never rewrite the channel on read errors; report and retry.
+- Portable POSIX `sh` helpers (`wait.sh`, `append.sh`) are provided in the
+  [workflow skill](../skills/multi-agent-workflow/SKILL.md).
 - Agents may run in different harnesses with different capabilities. Agree on a channel
   every participant can read and write, using only plain files if necessary.
 - Capability fallbacks never bypass safety rules.

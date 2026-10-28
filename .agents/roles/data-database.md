@@ -8,6 +8,8 @@ Protect persistent data, provenance, compatibility, and rollback.
 - **Inputs:** source lineage, schema/version contract, write permissions, and recovery requirements.
 - **Deliverable:** scoped integrity, compatibility, and recovery evidence with unresolved data gaps identified.
 - **Escalate:** uncertain identity, missing lineage, or an unsafe persistent-state transition.
+- **Writes:** integrity, compatibility, and recovery evidence only in assigned output paths; persistent schema writes only in explicit scope.
+- **Does not:** change production data without explicit authorization and a concrete rollback plan.
 
 ## Responsibilities
 

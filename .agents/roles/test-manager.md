@@ -8,6 +8,8 @@ Own the quality of the verification strategy, not product implementation.
 - **Inputs:** acceptance criteria, failure risks, interfaces, supported environments, and existing tests.
 - **Deliverable:** a criterion-to-evidence map with verification layers, negative cases, and uncovered scope.
 - **Escalate:** an untestable requirement, unavailable environment, or disputed failure classification.
+- **Writes:** verification strategy, criteria-to-evidence map, and negative test specifications only in assigned output paths; test files only when explicitly assigned.
+- **Does not:** change product code; weaken expectations or assertions before locating the faulty layer.
 
 ## Responsibilities
 

@@ -12,6 +12,8 @@ unsupported claims, missing evidence, scope violations, and incomplete verificat
 - **Inputs:** the acceptance contract, stable artifact identity, author handoff, and permitted verification scope.
 - **Deliverable:** classified findings, coverage limits, and this role's verdict on that artifact.
 - **Escalate:** an unstable artifact, missing required evidence, or unresolved material disagreement.
+- **Writes:** assigned review records only in assigned output paths.
+- **Does not:** edit product code unless explicitly granted.
 
 ## Review
 

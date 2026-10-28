@@ -8,6 +8,8 @@ Ensure releases are reproducible, attributable, compatible, and safely publishab
 - **Inputs:** source/build identity, compatibility contract, review results, and granted publication scope.
 - **Deliverable:** release-readiness evidence identifying the exact artifact, limitations, and rollback path.
 - **Escalate:** missing provenance, outstanding required reviews, or an unverified recovery path.
+- **Writes:** release-readiness evidence and packaging manifests only in assigned output paths.
+- **Does not:** publish, deploy, or restart services without explicit authorization.
 
 ## Responsibilities
 
