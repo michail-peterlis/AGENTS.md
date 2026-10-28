@@ -1,0 +1,56 @@
+#!/bin/sh
+# .githooks/pre-commit
+# Automatically runs validation and bumps ONLY the patch version on every commit.
+set -e
+
+# 1. Run Tests (Equivalent to npm test)
+echo "==> [pre-commit] Validating shell scripts..."
+for script in .agents/skills/multi-agent-workflow/scripts/*.sh; do
+  if [ -f "$script" ]; then
+    sh -n "$script" || { echo "Syntax error in $script" >&2; exit 1; }
+  fi
+done
+
+# 2. Lint Staged Files (Equivalent to npx lint-staged)
+cr=$(printf '\r')
+git diff --cached --name-only --diff-filter=ACM | while IFS= read -r f; do
+  case "$f" in
+    *.md)
+      if git show ":$f" 2>/dev/null | grep -q "$cr"; then
+        echo "Error: CRLF line endings detected in staged $f" >&2
+        exit 1
+      fi
+      ;;
+  esac
+done
+
+# 3. Bump ONLY the patch version (Equivalent to npm version patch --no-git-tag-version)
+# Note: Each commit execution bumps the patch version in VERSION.
+if [ -f VERSION ]; then
+  # Prevent overwriting unstaged edits to VERSION
+  if git diff --name-only | grep -q '^VERSION$'; then
+    echo "Error: Unstaged changes detected in VERSION. Please stage or stash them before committing." >&2
+    exit 1
+  fi
+
+  raw=$(tr -d '[:space:]' < VERSION)
+  raw=${raw#v}
+  if ! echo "$raw" | grep -Eq '^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$'; then
+    echo "Error: VERSION must be in canonical SemVer 'major.minor.patch' format without leading zeros (got '$raw')" >&2
+    exit 1
+  fi
+
+  IFS=. read -r major minor patch <<EOF
+$raw
+EOF
+
+  # Increment ONLY patch: major and minor are strictly preserved
+  patch=$((patch + 1))
+  new_version="${major}.${minor}.${patch}"
+
+  echo "$new_version" > VERSION
+  echo "==> [pre-commit] Bumped patch version: $raw -> $new_version"
+
+  # Stage VERSION into the current commit
+  git add VERSION
+fi

@@ -4,6 +4,24 @@ All notable public changes to Enterprise Agents are documented here.
 
 This project uses semantic versioning for the governance contract. Behavioral changes may be breaking even when they are Markdown/configuration-only.
 
+
+## [v0.3.2] - 2026-10-29
+
+### Added
+
+- PR validation workflow (`.github/workflows/validate-pr.yml`): validates substantive `CHANGELOG.md` additions and checks shell script syntax for pull requests targeting `main`.
+- Native patch-only version bumping hook (`.githooks/pre-commit`) and root `VERSION` file, with canonical SemVer 2.0 validation, dirty working tree protection, and per-commit-execution patch incrementing.
+- Updated `CONTRIBUTING.md` with pull request changelog requirements, hook installation instructions, and release workflow updates.
+
+### Changed
+
+- Release workflow (`.github/workflows/release.yml`): releases are now strictly dual-edition, packaging both `agents-kit-$VERSION` and `agents-kit-lite-$VERSION` together; requires a `lite` `Derived-from` trailer naming a `main` ancestor whose `AGENTS.md`/`.agents/` tree matches the released `main` commit; fails when the versioned changelog section is missing (no fallback).
+
+### Removed
+
+- Release workflow (`.github/workflows/release.yml`): removed the `source` manual dispatch input (`main` vs `lite`).
+
+
 ## [v0.3.0] - 2026-10-28
 
 ### Added
