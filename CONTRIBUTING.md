@@ -64,11 +64,18 @@ A pull request should include:
 - why the chosen layer is correct;
 - context impact, especially for root `AGENTS.md` changes;
 - compatibility impact;
-- evidence or examples where useful.
+- evidence or examples where useful;
+- a substantive addition to `CHANGELOG.md` for every pull request targeting `main`, normally under `[Unreleased]`; the PR workflow checks for added non-whitespace text, not its heading.
 
-The only executable tooling is the release workflow (`.github/workflows/release.yml`).
-Do not add other tooling or package dependencies unless explicitly discussed and
-accepted first.
+Repository automation includes the workflows in `.github/workflows/` and the optional local pre-commit hook (`.githooks/pre-commit`). Do not add other tooling, scripts, or package dependencies unless explicitly discussed and accepted first.
+
+To enable local shell validation and automatic patch-version incrementing on each commit:
+
+```sh
+git config core.hooksPath .githooks
+```
+
+The hook validates shell scripts, ensures staged Markdown files do not contain CRLF line endings, and increments the patch version in `VERSION` upon each commit execution. Note that `VERSION` is updated locally by this hook and is not currently read, validated, or cross-checked by `.github/workflows/release.yml`, which determines the release version strictly from its manual dispatch input. Concurrent branches that commit will each bump their local `VERSION`.
 
 ## Issues vs discussions
 
@@ -93,17 +100,18 @@ adds the license notice as `.agents/LICENSE`, and attaches a `.sha256` file.
 
 1. Move the `[Unreleased]` entries in `CHANGELOG.md` under `## [vX.Y.Z] - YYYY-MM-DD`
    and push to `main`.
-2. Run the workflow with `version: vX.Y.Z` and `source: main`. It creates the tag and
-   the release, with `agents-kit-vX.Y.Z.zip` and its `.sha256` file.
-3. Optional minimal edition: update the `lite` branch, then run the workflow with
-   `source: lite`. It adds `agents-kit-lite-vX.Y.Z.zip` to the same release.
+2. Ensure the `lite` branch is updated and derived from `main` (with a
+   `Derived-from: <main commit>` line).
+3. Run the Release workflow with `version: vX.Y.Z`. It verifies `lite` is synchronized
+   with `main`, creates the tag and the release, and packages both `agents-kit-vX.Y.Z.zip`
+   and `agents-kit-lite-vX.Y.Z.zip` together with their `.sha256` files.
 
 ### The `lite` branch
 
 `lite` holds only `AGENTS.md` and `.agents/` (including `.agents/.gitignore`),
 condensed for small context windows. Condensing may shorten wording and merge files,
 but must not drop safety or acceptance rules. End each `lite` commit message with a
-`Derived-from: <main commit>` line; the workflow warns when `main` has changed since.
+`Derived-from: <main commit>` line. The release workflow fails if the trailer is missing, its commit is not an ancestor of the released main commit, or AGENTS.md/.agents/ changed between those commits. This checks source freshness, not semantic distillation quality.
 
 Create `lite` once, without shared history, in its own folder so untracked files of
 your `main` checkout cannot be added to it:

@@ -4,17 +4,9 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: Version tag, for example v0.2.0
+        description: Version tag, for example v0.3.0
         required: true
         type: string
-      source:
-        description: Edition to package (release main first; lite adds its package to that release)
-        required: true
-        type: choice
-        options:
-          - main
-          - lite
-        default: main
 
 permissions:
   contents: write
@@ -28,7 +20,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       VERSION: ${{ inputs.version }}
-      SOURCE: ${{ inputs.source }}
       GH_TOKEN: ${{ github.token }}
       GH_REPO: ${{ github.repository }}
     steps:
@@ -40,12 +31,8 @@ jobs:
           if ! [[ "$VERSION" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
             echo "::error::Version must look like v1.2.3."; exit 1
           fi
-          if gh release view "$VERSION" > /dev/null 2>&1; then exists=yes; else exists=no; fi
-          if [ "$SOURCE" = main ] && [ "$exists" = yes ]; then
+          if gh release view "$VERSION" > /dev/null 2>&1; then
             echo "::error::Release $VERSION already exists."; exit 1
-          fi
-          if [ "$SOURCE" = lite ] && [ "$exists" = no ]; then
-            echo "::error::Release $VERSION does not exist; release main first."; exit 1
           fi
 
       - name: Check out the dispatched main commit
@@ -56,7 +43,6 @@ jobs:
           fetch-depth: 0
 
       - name: Check out the lite edition
-        if: inputs.source == 'lite'
         uses: actions/checkout@v4
         with:
           path: lite
@@ -64,52 +50,73 @@ jobs:
           fetch-depth: 1
 
       - name: Check that the tag is unused
-        if: inputs.source == 'main'
         run: |
           if git -C repo rev-parse -q --verify "refs/tags/$VERSION" > /dev/null; then
             echo "::error::Tag $VERSION already exists."; exit 1
           fi
 
-      - name: Warn if lite is behind main
-        if: inputs.source == 'lite'
+      - name: Verify lite is an up-to-date distilled edition of main
         run: |
           base=$(git -C lite log -1 --format=%B \
             | sed -n 's/^Derived-from:[[:space:]]*\([0-9a-f]\{7,40\}\)[[:space:]]*$/\1/p' | head -n 1)
           if [ -z "$base" ]; then
-            echo "::warning::The lite commit has no 'Derived-from: <main commit>' line."
-          elif ! git -C repo cat-file -e "$base^{commit}" 2> /dev/null; then
-            echo "::warning::Derived-from commit $base is not in main's history."
+            echo "::error::The lite branch commit has no 'Derived-from: <main commit>' line."; exit 1
+          elif ! git -C repo merge-base --is-ancestor "$base" "$GITHUB_SHA"; then
+            echo "::error::Derived-from commit $base is not an ancestor of main's released commit $GITHUB_SHA."; exit 1
           elif ! git -C repo diff --quiet "$base" "$GITHUB_SHA" -- AGENTS.md .agents; then
-            echo "::warning::main changed AGENTS.md or .agents/ since lite was derived from $base."
+            echo "::error::lite is out of sync with main: main changed AGENTS.md or .agents/ since lite was derived from $base. Update lite before releasing."; exit 1
           fi
+          echo "LITE_BASE=$base" >> "$GITHUB_ENV"
+          echo "Verified: lite is properly derived from main ancestor $base with zero unmerged governance diffs."
 
-      - name: Build package
+      - name: Build dual release packages
         run: |
           set -euo pipefail
-          if [ "$SOURCE" = main ]; then
-            src=repo; commit="$GITHUB_SHA"; package="agents-kit-$VERSION"
+          mkdir -p dist
+
+          build_edition() {
+            local src="$1"
+            local commit="$2"
+            local package="$3"
+
+            echo "==> Packaging $package from $src ($commit)..."
+            mkdir -p "build/$package/.agents"
+            git -C "$src" archive "$commit" AGENTS.md .agents | tar -x -C "build/$package"
+            cp -T --remove-destination repo/LICENSE "build/$package/.agents/LICENSE"
+            (cd "build/$package" \
+              && find AGENTS.md .agents -path .agents/workspace -prune -o -type f -print0 \
+              | sort -z | xargs -0 -r zip -X -q -nw "../../dist/$package.zip")
+            (cd dist && sha256sum "$package.zip" > "$package.zip.sha256")
+            echo "Packaged $package.zip:"
+            unzip -l "dist/$package.zip"
+          }
+
+          # 1. Package full edition from main
+          build_edition repo "$GITHUB_SHA" "agents-kit-$VERSION"
+
+          # 2. Package distilled edition from lite
+          lite_commit=$(git -C lite rev-parse HEAD)
+          build_edition lite "$lite_commit" "agents-kit-lite-$VERSION"
+
+          # 3. Extract release notes from CHANGELOG.md (with commit fallback)
+          if [ -f repo/CHANGELOG.md ]; then
+            awk -v heading="## [$VERSION]" 'index($0, heading) == 1 {found=1; next} /^## \[/ {found=0} found' \
+              repo/CHANGELOG.md > dist/notes.md
           else
-            src=lite; commit=$(git -C lite rev-parse HEAD); package="agents-kit-lite-$VERSION"
+            : > dist/notes.md
           fi
-          mkdir -p "build/$package/.agents" dist
-          git -C "$src" archive "$commit" AGENTS.md .agents | tar -x -C "build/$package"
-          cp -T --remove-destination repo/LICENSE "build/$package/.agents/LICENSE"
-          (cd "build/$package" \
-            && find AGENTS.md .agents -path .agents/workspace -prune -o -type f -print0 \
-            | sort -z | xargs -0 -r zip -X -q -nw "../../dist/$package.zip")
-          (cd dist && sha256sum "$package.zip" > "$package.zip.sha256")
-          awk -v heading="## [$VERSION]" 'index($0, heading) == 1 {found=1; next} /^## \[/ {found=0} found' \
-            repo/CHANGELOG.md > dist/notes.md
+
           if ! grep -q '[^[:space:]]' dist/notes.md; then
             echo "::error::CHANGELOG.md has no '## [$VERSION]' section."; exit 1
           fi
-          echo "Packaged $src commit $commit:"; unzip -l "dist/$package.zip"
 
-      - name: Publish
+          echo "" >> dist/notes.md
+          echo "---" >> dist/notes.md
+          echo "### Packaged Commit Identities" >> dist/notes.md
+          echo "- Full kit (\`main\`): \`$GITHUB_SHA\`" >> dist/notes.md
+          echo "- Distilled kit (\`lite\`): \`$lite_commit\` (Derived-from: \`$LITE_BASE\`)" >> dist/notes.md
+
+      - name: Publish Release with both editions
         run: |
-          if [ "$SOURCE" = main ]; then
-            gh release create "$VERSION" dist/*.zip dist/*.sha256 \
-              --target "$GITHUB_SHA" --title "$VERSION" --notes-file dist/notes.md
-          else
-            gh release upload "$VERSION" dist/*.zip dist/*.sha256
-          fi
+          gh release create "$VERSION" dist/*.zip dist/*.sha256 \
+            --target "$GITHUB_SHA" --title "$VERSION" --notes-file dist/notes.md
