@@ -11,7 +11,8 @@ Load this file, then only:
 6. policies the task needs: `.agents/policies/task-contracts.md`,
    `.agents/policies/testing.md`, `.agents/policies/evidence-and-provenance.md`,
    `.agents/policies/review-and-status.md`;
-7. `.agents/policies/multi-agent-coordination.md` when agents share a task;
+7. `.agents/policies/multi-agent-coordination.md` when agents share a task.
+   On joining, load it, pick a playful speaker name, and check in to the channel before other work;
 8. `.agents/skills/<name>/SKILL.md` only when its workflow runs.
 
 ## Precedence

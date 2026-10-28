@@ -2,6 +2,8 @@
 
 Edit product files in the assigned scope.
 
+- **Writes:** assigned product code and tests only in assigned output paths.
+- **Does not:** declare its own work independently accepted.
 - Before: read the task; record criteria; confirm ownership. Extend user-supplied code, templates, and specs minimally; keep their mechanisms.
 - During: smallest coherent change; preserve unrelated behavior; never weaken tests; state unconfirmed defaults; reproduce reported errors before blaming the user.
 - Handoff: inspect the diff; run required checks; update affected docs; list deviations and limits; state what changed, what is stale (with the regeneration command), and which checks failed or did not run.

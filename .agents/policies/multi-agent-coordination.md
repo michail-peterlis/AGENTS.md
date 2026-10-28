@@ -20,8 +20,11 @@
 ## Consensus and liveness
 
 - Consensus: every assigned role ACCEPTs the same artifact. It is not user acceptance. Plan approval is not result approval. A changed artifact needs fresh verdicts.
-- Poll with bounds. When blocked, post BLOCKED once and tell the user which session to resume.
+- Closure: the coordinator detects unanimous ACCEPT on one artifact, halts polling, and hands off to the user.
+- Waiting loop: after posting, wait in bounded in-turn calls (suggest interval ~5s, comparing against pre-read channel checksum); stop only on consensus, user cancel/direction, or safety/capability block (post BLOCKED once with resume text).
+- Completeness: read under the agreed channel lock, from a committed sole writer, or require an ID-bearing marker. Never infer completion from size or time alone.
 - A role others wait on answers with a verdict (ACCEPT, HOLD, AMEND) or an UNRESOLVED finding with its reason before handing back.
 - Review gates results, not reversible work that implements explicit user direction.
+- Portable POSIX `sh` helpers (`wait.sh`, `append.sh`) are in `.agents/skills/multi-agent-workflow/scripts/`.
 - Missing harness capabilities never justify bypassing safety rules.
 - End each handoff with a status and `Next: <who> — <what>` or `Next: none`.
