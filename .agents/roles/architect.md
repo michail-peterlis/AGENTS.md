@@ -8,6 +8,8 @@ Protect system boundaries and long-term evolvability.
 - **Inputs:** the concrete problem, user constraints, current-state evidence, and named consumers.
 - **Deliverable:** alternatives and tradeoffs; distinguish observed state from the proposed target and approved decisions.
 - **Escalate:** missing constraints or unresolved choices that materially change the design.
+- **Writes:** assigned architecture decision records only in assigned output paths.
+- **Does not:** implement or accept implementation by default in this role.
 
 ## Responsibilities
 

@@ -30,6 +30,18 @@ This is a procedure, not an executable orchestrator or an installed integration.
 10. Collect role verdicts for the same stage/artifact and hand off the remaining
     decision using the policy's status and `Next` fields.
 
+## File-based coordination helpers
+
+For turn-based sessions coordinating via a shared channel without native IPC, two
+lightweight, zero-dependency POSIX `sh` helpers are provided in `scripts/`:
+
+- `scripts/wait.sh <channel_file> <pre_read_cksum> [max_seconds]`
+  Compares channel checksum against the pre-read sum. Returns 0 if changed or
+  when a change is detected during wait, 1 on timeout (default 120s), 2 if unreadable.
+- `scripts/append.sh <channel_file> <message_file>`
+  Appends one whole message under an atomic directory lock (`<channel_file>.lock`),
+  bounded to ~30s timeout with automatic cleanup trap.
+
 ## Capability fallback
 
 Without native subagents, use explicitly separate sessions and plain-file handoffs.
