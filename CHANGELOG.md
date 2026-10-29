@@ -4,6 +4,12 @@ All notable public changes to Enterprise Agents are documented here.
 
 This project uses semantic versioning for the governance contract. Behavioral changes may be breaking even when they are Markdown/configuration-only.
 
+## [Unreleased]
+
+### Removed
+
+- Release workflow: removed the `lite` provenance, main-ancestry, and source-freshness gate. Both editions are still packaged, and their commit identities remain in the release notes.
+
 ## [v0.3.3] - 2026-10-29
 
 ### Added

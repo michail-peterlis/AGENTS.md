@@ -100,10 +100,8 @@ adds the license notice as `.agents/LICENSE`, and attaches a `.sha256` file.
 
 1. Move the `[Unreleased]` entries in `CHANGELOG.md` under `## [vX.Y.Z] - YYYY-MM-DD`
    and push to `main`.
-2. Ensure the `lite` branch is updated and derived from `main` (with a
-   `Derived-from: <main commit>` line).
-3. Run the Release workflow with `version: vX.Y.Z` (or leave empty to automatically release `v<VERSION>` from `VERSION`). It verifies `lite` is synchronized
-   with `main`, creates the tag and the release, and packages both `agents-kit-vX.Y.Z.zip`
+2. Ensure the `lite` branch contains the edition you want to release.
+3. Run the Release workflow with `version: vX.Y.Z` (or leave empty to automatically release `v<VERSION>` from `VERSION`). It creates the tag and the release, and packages both `agents-kit-vX.Y.Z.zip`
    and `agents-kit-lite-vX.Y.Z.zip` together with their `.sha256` files.
 
 ### The `lite` branch
@@ -111,7 +109,7 @@ adds the license notice as `.agents/LICENSE`, and attaches a `.sha256` file.
 `lite` holds only `AGENTS.md` and `.agents/` (including `.agents/.gitignore`),
 condensed for small context windows. Condensing may shorten wording and merge files,
 but must not drop safety or acceptance rules. End each `lite` commit message with a
-`Derived-from: <main commit>` line. The release workflow fails if the trailer is missing, its commit is not an ancestor of the released main commit, or AGENTS.md/.agents/ changed between those commits. This checks source freshness, not semantic distillation quality.
+`Derived-from: <main commit>` line for provenance. The release workflow packages the checked-out `lite` commit without validating that trailer, main ancestry, or source freshness.
 
 Create `lite` once, without shared history, in its own folder so untracked files of
 your `main` checkout cannot be added to it:
