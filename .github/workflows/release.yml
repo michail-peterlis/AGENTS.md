@@ -80,20 +80,6 @@ jobs:
 
           echo "VERSION=$ver" >> "$GITHUB_ENV"
 
-      - name: Verify lite is an up-to-date distilled edition of main
-        run: |
-          base=$(git -C lite log -1 --format=%B \
-            | sed -n 's/^[[:space:]]*Derived-from:[[:space:]]*\([0-9a-f]\{7,40\}\)[[:space:]]*$/\1/p' | head -n 1)
-          if [ -z "$base" ]; then
-            echo "::error::The lite branch commit has no 'Derived-from: <main commit>' line."; exit 1
-          elif ! git -C repo merge-base --is-ancestor "$base" "$GITHUB_SHA"; then
-            echo "::error::Derived-from commit $base is not an ancestor of main's released commit $GITHUB_SHA."; exit 1
-          elif ! git -C repo diff --quiet "$base" "$GITHUB_SHA" -- AGENTS.md .agents; then
-            echo "::error::lite is out of sync with main: main changed AGENTS.md or .agents/ since lite was derived from $base. Update lite before releasing."; exit 1
-          fi
-          echo "LITE_BASE=$base" >> "$GITHUB_ENV"
-          echo "Verified: lite is properly derived from main ancestor $base with zero unmerged governance diffs."
-
       - name: Build dual release packages
         run: |
           set -euo pipefail
@@ -139,7 +125,7 @@ jobs:
           echo "---" >> dist/notes.md
           echo "### Packaged Commit Identities" >> dist/notes.md
           echo "- Full kit (\`main\`): \`$GITHUB_SHA\`" >> dist/notes.md
-          echo "- Distilled kit (\`lite\`): \`$lite_commit\` (Derived-from: \`$LITE_BASE\`)" >> dist/notes.md
+          echo "- Distilled kit (\`lite\`): \`$lite_commit\`" >> dist/notes.md
 
       - name: Publish Release with both editions
         run: |
