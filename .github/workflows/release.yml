@@ -4,8 +4,9 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: Version tag, for example v0.3.0
-        required: true
+        description: "Version tag (optional, e.g. v0.3.2). Leave empty to use v<VERSION> from VERSION file."
+        required: false
+        default: ""
         type: string
 
 permissions:
@@ -19,20 +20,14 @@ jobs:
   release:
     runs-on: ubuntu-latest
     env:
-      VERSION: ${{ inputs.version }}
+      INPUT_VERSION: ${{ inputs.version }}
       GH_TOKEN: ${{ github.token }}
       GH_REPO: ${{ github.repository }}
     steps:
-      - name: Check inputs and release state
+      - name: Check release ref
         run: |
           if [ "$GITHUB_REF" != "refs/heads/main" ]; then
             echo "::error::Run this workflow from main."; exit 1
-          fi
-          if ! [[ "$VERSION" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-            echo "::error::Version must look like v1.2.3."; exit 1
-          fi
-          if gh release view "$VERSION" > /dev/null 2>&1; then
-            echo "::error::Release $VERSION already exists."; exit 1
           fi
 
       - name: Check out the dispatched main commit
@@ -49,16 +44,46 @@ jobs:
           ref: lite
           fetch-depth: 1
 
-      - name: Check that the tag is unused
+      - name: Determine and validate release version
         run: |
-          if git -C repo rev-parse -q --verify "refs/tags/$VERSION" > /dev/null; then
-            echo "::error::Tag $VERSION already exists."; exit 1
+          input_ver=$(echo "$INPUT_VERSION" | tr -d '[:space:]')
+          if [ -n "$input_ver" ]; then
+            if ! echo "$input_ver" | grep -Eq '^v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$'; then
+              echo "::error::Provided version '$input_ver' must look like v1.2.3 without leading zeros." >&2
+              exit 1
+            fi
+            ver="$input_ver"
+            echo "==> Using manual version override: $ver"
+          else
+            if [ ! -f repo/VERSION ]; then
+              echo "::error::VERSION file not found in repo." >&2
+              exit 1
+            fi
+            raw=$(tr -d '[:space:]' < repo/VERSION)
+            raw=${raw#v}
+            if ! echo "$raw" | grep -Eq '^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$'; then
+              echo "::error::repo/VERSION content '$raw' is not canonical SemVer (e.g. 1.2.3)." >&2
+              exit 1
+            fi
+            ver="v$raw"
+            echo "==> Determined version from repo/VERSION: $ver"
           fi
+
+          if gh release view "$ver" > /dev/null 2>&1; then
+            echo "::error::Release $ver already exists." >&2
+            exit 1
+          fi
+          if git -C repo rev-parse -q --verify "refs/tags/$ver" > /dev/null; then
+            echo "::error::Tag $ver already exists." >&2
+            exit 1
+          fi
+
+          echo "VERSION=$ver" >> "$GITHUB_ENV"
 
       - name: Verify lite is an up-to-date distilled edition of main
         run: |
           base=$(git -C lite log -1 --format=%B \
-            | sed -n 's/^Derived-from:[[:space:]]*\([0-9a-f]\{7,40\}\)[[:space:]]*$/\1/p' | head -n 1)
+            | sed -n 's/^[[:space:]]*Derived-from:[[:space:]]*\([0-9a-f]\{7,40\}\)[[:space:]]*$/\1/p' | head -n 1)
           if [ -z "$base" ]; then
             echo "::error::The lite branch commit has no 'Derived-from: <main commit>' line."; exit 1
           elif ! git -C repo merge-base --is-ancestor "$base" "$GITHUB_SHA"; then
