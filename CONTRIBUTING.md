@@ -75,7 +75,7 @@ To enable local shell validation and automatic patch-version incrementing on eac
 git config core.hooksPath .githooks
 ```
 
-The hook validates shell scripts, ensures staged Markdown files do not contain CRLF line endings, and increments the patch version in `VERSION` upon each commit execution. Note that `VERSION` is updated locally by this hook and is not currently read, validated, or cross-checked by `.github/workflows/release.yml`, which determines the release version strictly from its manual dispatch input. Concurrent branches that commit will each bump their local `VERSION`.
+The hook validates shell scripts, ensures staged Markdown files do not contain CRLF line endings, and increments the patch version in `VERSION` upon each commit execution. Note that `VERSION` is updated locally by this hook; the Release workflow automatically defaults to releasing `v<VERSION>` from this file if no manual version override is provided on dispatch. Concurrent branches that commit will each bump their local `VERSION`.
 
 ## Issues vs discussions
 
@@ -102,7 +102,7 @@ adds the license notice as `.agents/LICENSE`, and attaches a `.sha256` file.
    and push to `main`.
 2. Ensure the `lite` branch is updated and derived from `main` (with a
    `Derived-from: <main commit>` line).
-3. Run the Release workflow with `version: vX.Y.Z`. It verifies `lite` is synchronized
+3. Run the Release workflow with `version: vX.Y.Z` (or leave empty to automatically release `v<VERSION>` from `VERSION`). It verifies `lite` is synchronized
    with `main`, creates the tag and the release, and packages both `agents-kit-vX.Y.Z.zip`
    and `agents-kit-lite-vX.Y.Z.zip` together with their `.sha256` files.
 

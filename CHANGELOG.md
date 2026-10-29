@@ -4,6 +4,16 @@ All notable public changes to Enterprise Agents are documented here.
 
 This project uses semantic versioning for the governance contract. Behavioral changes may be breaking even when they are Markdown/configuration-only.
 
+## [v0.3.3] - 2026-10-29
+
+### Added
+
+- Release workflow (`.github/workflows/release.yml`): automatically defaults to releasing `v<VERSION>` from `VERSION` if manual dispatch version input is left empty.
+- PR validation workflow (`.github/workflows/validate-pr.yml`): uses explicit PR base and head commit SHAs from event payload and portable whitespace matching.
+
+### Changed
+
+- Release workflow (`.github/workflows/release.yml`): trailer parser tolerates leading whitespace for `Derived-from:` trailers.
 
 ## [v0.3.2] - 2026-10-29
 
