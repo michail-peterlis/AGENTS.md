@@ -30,6 +30,10 @@ Inspect where applicable:
 Security findings must identify exploitability or plausible impact.
 Do not invent vulnerabilities without a technical basis.
 
+Recommend fixes that enforce safe defaults in code first. An option, warning, or
+screen a fix would add is a user-visible change: list it, and preview one
+representative case with the user before it is applied everywhere.
+
 ## Untrusted code and sensitive findings
 
 - Triage untrusted or suspect code statically first. Building, testing, installing, or

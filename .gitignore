@@ -1,5 +1,6 @@
-# Local analysis inputs; never publish.
-/for-analysis/
+# Local task and coordination records.
+/.agents/workspace/
 
-# claude harness lock file
-/.claude/
+# Python validation caches.
+__pycache__/
+*.py[co]

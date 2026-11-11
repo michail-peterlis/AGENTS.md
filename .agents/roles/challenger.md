@@ -46,17 +46,7 @@ For each finding, state:
 4. classification;
 5. what evidence or change would resolve it.
 
-Classify as one of:
-
-- CONFIRMED DEFECT
-- REQUIRED
-- ACCEPTED
-- OPTIONAL IMPROVEMENT
-- DEFERRED
-- OUT OF SCOPE
-- UNRESOLVED
-- BLOCKED
-
+Classify with the list in `.agents/policies/review-and-status.md`.
 Distinguish confirmed defects from risks, hypotheses, preferences, and unknowns.
 Do not treat stylistic preference as a defect.
 
@@ -64,6 +54,17 @@ Do not treat stylistic preference as a defect.
 
 Rerun important tests or inspect relevant code/evidence where practical.
 Do not accept reported counts blindly.
+
+Exercise the main user path in an authorized disposable environment; compare it with
+the supplied reference. Validate operator commands by safe execution, a dry run, or
+inspection of authoritative help/source as appropriate to their effects. Never commit,
+publish, deploy, access private data, or change production merely to check instructions;
+review is not authorization.
+
+State which commands were executed, simulated, or inspected and what those methods do
+not prove. If a required runtime or integration gate cannot be exercised safely, post
+HOLD with an UNRESOLVED finding naming the missing check and authorized operator.
+A source inspection or dry run does not substitute for a required runtime gate.
 
 Do not invent requirements, domain knowledge, production facts, or reviewer authority.
 
@@ -94,9 +95,14 @@ summarized or excluded.
   (environment-limited). Do not call it a defect, and do not accept on the producer's
   logs alone.
 - Re-checking hashes or renders alone is not review.
+- Visual evidence for others is the image, a short description, and the path of the
+  source it was rendered from. Say how many images you looked at; if you cannot see
+  images, say so and review the description and source.
 
 ## Authority
 
 A review verdict is neither an authorization nor a completion decision.
 Checking your own edits is a self-check, not independent review. Take implementer
-authority only when explicitly granted.
+authority only when explicitly granted. Relay a defect the user reports to you to the
+assigned editor; if you are told to fix it yourself, announce the handoff first and
+do not review that change.

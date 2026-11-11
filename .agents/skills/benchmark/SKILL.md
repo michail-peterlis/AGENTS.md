@@ -1,6 +1,7 @@
 # Skill: Benchmark
 
 Load when measuring performance, memory, throughput, size, or model quality.
+Also load [experiments and benchmarks](../../policies/experiments-and-benchmarks.md).
 
 ## Workflow
 

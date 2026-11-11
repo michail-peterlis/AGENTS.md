@@ -17,9 +17,15 @@ Before completion, confirm as applicable:
 - production boundaries respected;
 - independent review complete;
 - all remaining findings classified;
+- close-out done (below);
 - designated completion authority issued a decision.
 
 If required work remains, the task is not COMPLETE.
+
+Close-out: list everything the task created that is not the deliverable (files,
+copies, logs, captures, installed packages, running processes), wherever it is, each
+with keep or remove. Remove on the user's approval, and say what you could not
+remove.
 
 A request to "finish" does not waive gates; report what remains.
 

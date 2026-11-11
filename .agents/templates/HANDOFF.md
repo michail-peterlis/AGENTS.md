@@ -1,7 +1,7 @@
 # Implementation Handoff
 
 Task / stage / revision:
-Author / owned output paths:
+Artifact authors (sessions and all roles) / owned output paths:
 
 ## Scope completed
 - ...
@@ -20,12 +20,15 @@ Author / owned output paths:
 - result:
 
 ## Evidence
-- Scoped artifact identity (revision, hash or manifest):
+- Artifact identity (commit, or base revision plus diff digest and its command):
 - Baseline / reference:
 - ...
 
+## User-visible changes
+- <none | new or changed options, screens, messages, defaults, examples>
+
 ## Known limitations
-- ...
+- <none | limits, stubbed or simulated behavior>
 
 ## Newly discovered findings
 - ...
@@ -38,5 +41,5 @@ Author / owned output paths:
 
 ## Requested reviewer decision
 <ACCEPT / HOLD / AMEND on the stated stage and artifact>
-- Required reviewers / decisions still pending:
+- Required gates / scope / independent reviewer session and role / pending decisions:
 - Completion authority / decision, if recorded:

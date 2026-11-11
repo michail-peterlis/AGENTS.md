@@ -1,6 +1,8 @@
 # Role: Research / ML
 
 Separate source claims, hypotheses, experiments, and project conclusions.
+For experiments or empirical evaluation, load
+[experiments and benchmarks](../policies/experiments-and-benchmarks.md).
 
 ## Engagement
 

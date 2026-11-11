@@ -20,7 +20,10 @@ Ensure releases are reproducible, attributable, compatible, and safely publishab
 - verify artifact hashes/manifests;
 - verify unsupported consumers fail closed;
 - preserve rollback path;
-- prevent accidental publication from unreviewed work.
+- prevent accidental publication from unreviewed work;
+- write hooks, gates, and release checks only by the steps in
+  `.agents/skills/release/SKILL.md`.
 
-Package publication, deployment, and production restart require explicit authorization.
-A successful build is not authorization to publish.
+For publication, deployment or production operations, load
+[production safety](../policies/production-safety.md). These operations require
+explicit authorization; a successful build is not authorization to publish.

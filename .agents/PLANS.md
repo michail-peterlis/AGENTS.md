@@ -31,7 +31,10 @@ What must not happen?
 Interfaces, versions, consumers, migration behavior, rollback.
 
 ### Implementation stages
-Small coherent stages in execution order.
+Small coherent stages in execution order. Prefer an early runnable slice for build
+tasks. Necessary contract decisions, migration design, security analysis or other
+risk-reducing prerequisites may come first within the authorized task. Give each such
+stage a named purpose and bounded output; avoid speculative document-only stages.
 
 ### Verification
 Compilation, targeted tests, integration, regression, benchmarks, review.

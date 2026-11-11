@@ -1,51 +1,95 @@
 # Skill: Multi-Agent Workflow
 
 Use for a task that benefits from explicit delegation or independent review.
-For rules and decision vocabulary, load the
-[coordination policy](../../policies/multi-agent-coordination.md).
 This is a procedure, not an executable orchestrator or an installed integration.
+
+*Peers* are separate sessions the user starts; they coordinate through a channel file
+under the [coordination policy](../../policies/multi-agent-coordination.md), which
+also holds the decision vocabulary. *Delegates* are subagents your own session starts
+and collects; they need no channel, names, or check-in. Asked to work with peers, do
+not spawn delegates instead.
 
 ## Procedure
 
-1. Establish the task contract, participants, coordinator and completion authority
-   using the policy. Select only the roles the task needs; do not start every role.
+1. Establish the task contract, participants and completion authority. For peers,
+   use the coordination policy and name a coordinator; delegates stay under their
+   parent session's scoped brief. Select only the roles the task needs.
 2. Decompose the work into bounded outputs and dependencies. A small task may need
    only one implementer and an independent reviewer, not a standing committee.
-3. Prepare each delegation: role, objective, necessary source references, artifact
-   revision, output paths/owner, verification requirements and return format.
-   Include only relevant context; distinguish source facts from interpretations.
-4. Record the turn, time, context/output and repair budgets. Check the chosen runtime's
-   actual delegation, permission and cancellation capabilities; record any fallback.
-   Select models from the project's permitted profiles, not hard-coded role defaults.
-5. Write the delegated task to the agreed human-readable record before dispatch.
+3. Prepare each brief: role, objective, necessary source references, artifact
+   identity, verification requirements, return format, the working directory, and
+   the only paths it may write; everything else is read-only. For peers, use
+   `.agents/templates/LAUNCH.md`. For a review or audit, give the question and the
+   sources, not the answer you expect. Include only relevant context; distinguish
+   source facts from interpretations.
+4. Load [tool authority](../../policies/tool-authority.md) before assigning tools
+   or permissions. Record limits the user set (time, cost, rework rounds); do not
+   invent a waiting limit. For delegates that build or test, set concurrency, time and
+   memory caps per command. Check the runtime's actual delegation, permission and
+   cancellation capabilities; record any fallback. Select models from the project's
+   permitted profiles, not hard-coded role defaults.
+5. Write the brief to the human-readable record before dispatch, where a restart
+   cannot erase it.
 6. Dispatch independent read-heavy investigations in parallel where useful. Schedule
    dependent edits sequentially, observing the policy's ownership rules.
-7. Persist public replies, objections, limitations and outcomes before using them for
-   decisions. Link large readable reports instead of passing full logs through each
-   agent. Keep the file record even when runtime messages carry the work faster.
-8. Deliver a stable implementation handoff with its scoped artifact identity. Request
+7. When a delegate returns, list what changed outside its paths; its own statement
+   about side effects is REPORTED. Persist replies, objections, limitations and
+   outcomes before using them for decisions. Link large reports instead of passing
+   full logs through each agent.
+8. Deliver a stable implementation handoff with its artifact identity. Request
    independent verification against the recorded criteria, not the author's summary.
 9. Route required corrections to the assigned editor; issue a fresh handoff after
-   changes. Stop at the agreed repair budget and escalate remaining disagreements.
-10. Collect role verdicts for the same stage/artifact and hand off the remaining
-    decision using the policy's status and `Next` fields.
+   changes. Escalate a disagreement that survives two rounds, or the user's limit,
+   instead of repeating it.
+10. Re-check findings you will act on. For review, record artifact authors by session
+    and collect ACCEPTs for the contract's required independent gates and scopes on
+    the same identity; role-switching does not make an author independent. Research
+    delegates return findings, not mandatory verdicts. Hand off the remaining decision
+    using the policy's status and `Next` fields.
 
-## File-based coordination helpers
+## Waiting on a shared channel
 
-For turn-based sessions coordinating via a shared channel without native IPC, two
-lightweight, zero-dependency POSIX `sh` helpers are provided in `scripts/`:
+Three dependency-free POSIX `sh` helpers are in `scripts/`:
 
-- `scripts/wait.sh <channel_file> <pre_read_cksum> [max_seconds]`
-  Compares channel checksum against the pre-read sum. Returns 0 if changed or
-  when a change is detected during wait, 1 on timeout (default 120s), 2 if unreadable.
-- `scripts/append.sh <channel_file> <message_file>`
-  Appends one whole message under an atomic directory lock (`<channel_file>.lock`),
-  bounded to ~30s timeout with automatic cleanup trap.
+- `read.sh <channel> [<seen> | -<last>]` prints complete lines, then
+  `seen=<lines> sum=<checksum>`. Counts must be 0–2147483647 without leading zeros;
+  exit 2 is a read failure, 64 bad usage. Retain the old cursor on any failure.
+- `wait.sh <channel> <sum> [<seconds>]` returns 0 as soon as the channel differs from
+  `<sum>`, 1 on timeout (default 120 s), 2 if unreadable, 64 on a malformed sum.
+- `append.sh <channel> <message file>` appends one whole message under a directory
+  lock (`<channel>.lock`) and gives up after about 30 s. Use regular non-symlink files
+  and a channel with one hard link; self-input and final-component symlinks are
+  rejected with exit 64. Directory aliases are normalized to the same lock.
+  Helpers coordinate cooperative writers, not hostile
+  filesystem mutations.
+
+The loop, from the repository root. Carry the two numbers from each `read.sh` into
+the next commands; `<prefix>` is your message-ID prefix. Shell variables may not
+survive between tool calls: begin every call with the first line.
+
+```sh
+W=.agents/workspace/<task>; C=$W/chat.md; H=.agents/skills/multi-agent-workflow/scripts
+sh "$H/read.sh" "$C" -60                  # join: the last 60 lines, then seen=<n> sum=<s>
+# act; write your message to $W/<prefix>-msg.md, then:
+sh "$H/append.sh" "$C" "$W/<prefix>-msg.md"
+sh "$H/read.sh" "$C" <n>                  # your message and anything a peer posted meanwhile
+sh "$H/wait.sh" "$C" <s> 15 >/dev/null
+# Inspect exit status: 0 -> read from <n>; 1 -> back off; 2/64 -> error, not timeout.
+```
+
+After each timeout double the seconds (15, 30, 60, 120, 240), then stay at about 300;
+after any message start again at 15. Keep each call below your tool's timeout. The
+stop causes are in the policy; a timeout is not one of them. On an announced channel
+rotation, switch to the new path and reset `seen` to 0, even when the new file is longer.
 
 ## Capability fallback
 
 Without native subagents, use explicitly separate sessions and plain-file handoffs.
-Without a shared write-safe channel, designate a transcript writer and a readable
-inbox for each peer. If the required participant, independent context, permissions
-or file record cannot be provided safely, report the missing capability; do not
-simulate an independent reviewer inside the author's conversation.
+Without a shell, write each message as a file in the task folder; one agent is the
+sole transcript writer and appends them verbatim. If the required participant, independent context, permissions or file
+record cannot be provided safely, report the missing capability; do not simulate an
+independent reviewer inside the author's conversation.
+
+A worker with a small context window gets one self-contained brief that fits together
+with its input, a bounded input, and a fixed output format; do not expect it to
+explore. Treat what it returns as unverified.

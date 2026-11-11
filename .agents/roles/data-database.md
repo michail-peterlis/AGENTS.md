@@ -24,4 +24,6 @@ Protect persistent data, provenance, compatibility, and rollback.
 - distinguish raw source, normalized values, assertion, observation, inference,
   review, and prediction.
 
-Production data changes require explicit authorization and a concrete rollback plan.
+Before production data operations, load
+[production safety](../policies/production-safety.md). Changes require explicit
+authorization and a concrete rollback plan.

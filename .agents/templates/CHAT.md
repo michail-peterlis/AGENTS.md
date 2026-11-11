@@ -1,36 +1,35 @@
-# Collaboration chat — <task>
+# Chat — <task>
 
 Copy to `.agents/workspace/<task>/chat.md`, or to the location `PROJECT.md` names.
-Follow `.agents/policies/multi-agent-coordination.md` (path from the repository root).
+Rules: `.agents/policies/multi-agent-coordination.md` (path from the repository root).
+This channel preserves check-ins, relayed directions, decisions and verdicts. The
+task record owns the contract and scoped directions; the state file
+(`.agents/templates/STATE.md`) indexes current status and links the source records.
 
-## Participants and scope
+## Messages
 
-- Participants: <playful name> (<role>, <session>), one per agent
-- Coordinator / completion authority: <assigned identities and authority>
-- Current-state location / agreed output owners: <paths and writers>
-- Task contract / review stages / wait and rework budgets: <references>
+- **<name> (<role>) · <prefix>-001 · <UTC time>**
+  > Check-in: roles <roles>; session handle <handle | UNKNOWN>; write scope <paths>;
+  > runs on <as known>.
 
-## Discussion
-
-- **<playful name> (<role>) · M-001 · <UTC from tool output> · reply-to: none · PLANNED**
-  > **Proposal:** <change and relevant task/stage/revision>
-  > **Reason / evidence:** <concise rationale and source references>
-  > **Question / objection:** <decision requested, or none>
-  > Next: <who> — <what>, by <time>
-
-- **<playful name> (<role>) · M-002 · <UTC from tool output> · reply-to: M-001 · REVIEW PENDING**
-  > **Response:** <agreement, objection, or amendment and its reason>
-  > **Verdict, when deciding:** <ACCEPT / HOLD / AMEND> on <exact scope and artifact identity>.
-  > **Still required:** <other role decisions, implementation review, or human acceptance>
-  > Next: <who> — <what>, by <time>
+- **<name> (<role>) · <prefix>-002 · <UTC time> · re <ID>**
+  > <One result, question, proposal, or decision. Link files; do not paste them.>
+  > Identity: <commit | base revision, diff digest, and the command that printed it>
+  > Verdict: <ACCEPT | HOLD | AMEND> — <gate and scope; reviewer session/role>
+  > Next: <who> — <what>
 
 ## Writing guidance
 
-Header fields are required: ID, the author's playful name and role, UTC time, reply-to, status.
-Task/stage/revision, evidence, objections and verdicts apply when relevant; a greeting
-is not a decision. Use the policy's status vocabulary and `Next` format.
-
-Record public discussion and outcomes, not private reasoning. Preserve objections
-when linking large replies to separate readable files. For relayed human directions,
-quote the source, identify the receiving session, and mark redactions explicitly.
-Prefix every quoted line with `>` so examples do not look like new participants.
+- Header: your name and role, an ID with your own prefix, UTC time, and the message
+  you answer when there is one. No status words in the header.
+- Body: about eight lines. The `Identity`, `Verdict`, and `Next` lines appear only
+  when they apply. One identity per verdict; link required release/data manifests
+  rather than generating per-file hash lists solely for review bookkeeping.
+- Write the message to `<prefix>-msg.md` in the task folder and append it with the
+  helper. Fill times, hashes, and counts by command substitution, for example
+  `"$(date -u +%Y-%m-%dT%H:%M:%SZ)"`, never by typing them.
+- Relayed user directions: quote verbatim, name the receiving session, mark RELAYED
+  and any redaction.
+- Record discussion and outcomes, not private reasoning. Keep objections when you
+  link a long reply as a separate file.
+- Prefix every quoted line with `>` so examples do not look like new participants.

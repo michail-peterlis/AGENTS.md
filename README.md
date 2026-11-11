@@ -73,6 +73,23 @@ Runtime messaging may improve delivery speed, but delegated tasks, public replie
 and outcomes must still be recorded in files. Large reports may be linked rather
 than copied through every context. See the [CHAT template](.agents/templates/CHAT.md).
 
+### Running several sessions on one task
+
+1. Start the coordinating session and give it the task and its roles.
+2. Tell it which session will take which role, or let it propose. It writes one start
+   prompt per session from the [LAUNCH template](.agents/templates/LAUNCH.md).
+3. Start each other session with its prompt. Agents check in on the channel and then
+   stay in the working loop (act, post, wait on the channel, read) until the
+   coordinator posts STOP or you tell them to stop. If one goes quiet, the others tell
+   you which session to wake.
+4. To stop for the day, say "pause". Each agent posts a pause note and the coordinator
+   updates the task's [state file](.agents/templates/STATE.md), which also answers
+   "status" and "who is who". To continue, start each session with "read the state
+   file" and its resume line.
+5. When only you commit, record your shell and workflow once in `PROJECT.md`; agents
+   then hand you plain commands
+   ([operator commands](.agents/policies/operator-commands.md)).
+
 Kit skills are generic and optional. Project-specific skills belong in the adopting
 repository: when a workflow recurs, create `.agents/skills/<name>/SKILL.md` from
 `.agents/templates/SKILL.md` within the project's granted authority. Registering
@@ -88,9 +105,11 @@ Agents should normally read only:
 1. root `AGENTS.md`;
 2. assigned role under `.agents/roles/`;
 3. policies required by the active task;
-4. nearest nested `AGENTS.md`;
-5. active task or execution plan;
-6. task-specific `.agents/skills/*/SKILL.md` when needed.
+4. `PROJECT.md`, when present;
+5. nearest nested `AGENTS.md`;
+6. active task or execution plan;
+7. task-specific `.agents/skills/*/SKILL.md` when needed;
+8. the coordination policy when several agents share a task.
 
 Agents must not preload every role, policy, skill, or historical document.
 
@@ -103,7 +122,16 @@ Agents must not preload every role, policy, skill, or historical document.
 3. Assign the roles your project uses.
 4. Add nested `AGENTS.md` files for major components (see `docs/examples/`).
 5. When project context is needed (coordination, completion authority, environment,
-   protected paths), create `PROJECT.md` from `.agents/templates/PROJECT.md`.
+   protected paths), create `PROJECT.md` from `.agents/templates/PROJECT.md`. It holds
+   lasting project facts, not the state of a task.
+
+### Several repositories in one folder
+
+Install the kit whole (`AGENTS.md` plus `.agents/`) at the root of each independent
+repository and commit it there; each repository then carries its own rules, project
+commands, and `PROJECT.md`. A parent folder that is not a repository can hold its own
+copy for work that spans them. Agents do not trim or remove kit files, and do not
+clear `.agents/workspace/`, unless you tell them to.
 
 ## What to copy
 

@@ -1,6 +1,7 @@
 # Role: Documentation
 
-Document actual behavior and decisions.
+Document actual behavior and decisions. Load the
+[documentation policy](../policies/documentation.md) for authoring or review.
 
 ## Engagement
 
@@ -21,7 +22,9 @@ Document actual behavior and decisions.
 - verify commands, file paths, versions, and examples before publishing;
 - never document aspirational behavior as implemented;
 - in reviews, label suggested decisions, paths, and endpoints as PROPOSED;
-- cite "tested" or "verified" claims as claims unless you re-ran the checks.
+- cite "tested" or "verified" claims as claims unless you re-ran the checks;
+- write for the reader the task names, in plain language and no longer than they
+  need; do not mention sources that reader cannot open.
 
 Documentation-only changes still require scope and evidence, but do not require
 irrelevant compilation claims.

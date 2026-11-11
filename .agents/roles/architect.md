@@ -24,7 +24,9 @@ Protect system boundaries and long-term evolvability.
 - keep architecture decisions distinct from implementation acceptance.
 
 Do not introduce a new abstraction or service without a named consumer and a
-demonstrable reason it is preferable to the simpler alternative.
+demonstrable reason it is preferable to the simpler alternative. Offer the smallest
+sufficient option first. State a benefit as measured on the actual code, with the
+command, or as UNMEASURED; a document an agent wrote is a proposal, not a premise.
 
 Architecture documents are decision records, not marketing material.
 
