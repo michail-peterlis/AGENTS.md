@@ -55,6 +55,24 @@ extensions.
 When changing coordination, review, or privacy rules, re-check the
 [manual review scenarios](docs/review-scenarios.md).
 
+## Local kit validation
+
+Run from the repository root:
+
+```sh
+python3 -B -I tools/check_kit.py
+```
+
+The checker validates local Markdown references, policy reference paths, line endings
+and shell syntax in `AGENTS.md` and `.agents/`, excluding workspace records, then runs
+`tests/`. It requires Python 3.9+ (standard library only), `sh` and POSIX system tools.
+Tests create disposable fixtures at the repository root and remove them on cleanup.
+This checks the kit and helpers, not an adopting project's code or agent compliance;
+also walk the manual review scenarios for changed governance behavior.
+
+Maintainer tooling belongs in `tools/` and `tests/`, not the reusable `.agents/` kit.
+No additional agent-runtime dependency or CI/hook installation is required.
+
 ## Pull requests
 
 A pull request should include:

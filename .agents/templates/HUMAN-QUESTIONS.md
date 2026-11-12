@@ -23,7 +23,8 @@ Sample: <representative rendered sample for material, ambiguous visual/layout ch
 ## Rules
 
 - One decision per question; no compound questions.
-- Describe options by their outcome for the user, not by implementation detail.
+- Describe options by their outcome for the user, not by implementation detail. Put
+  the one you recommend first and say why in a few words.
 - A reply that clearly selects an option, by letter or in words, settles it. A blanket
   reply (such as "confirmed") to several open choices settles none; ask again.
 - Silence is not a default unless the user agreed to that default.

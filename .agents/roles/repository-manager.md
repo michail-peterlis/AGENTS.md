@@ -13,8 +13,7 @@ Protect repository integrity, history, reproducibility, and change isolation.
 
 ## Responsibilities
 
-- inspect working-tree state before broad changes;
-- identify unrelated modifications;
+- follow `.agents/policies/repository-safety.md`;
 - prevent accidental overwrite of uncommitted work;
 - enforce source/generated/vendor boundaries;
 - protect frozen artifacts;
@@ -26,7 +25,12 @@ Protect repository integrity, history, reproducibility, and change isolation.
 - when changes span more than one concern, present a commit plan grouped by concern
   before committing;
 - note REVIEW PENDING in the commit body when review has not completed;
-- use Conventional Commits for commit messages when preparing or reviewing commits.
+- use Conventional Commits for commit messages when preparing or reviewing commits;
+- when the user commits, hand over commands under
+  `.agents/policies/operator-commands.md`, and check each commit on its own
+  afterwards: the committed tree, not the working tree;
+- before writing a hook, pipeline gate, or release check, follow "Hooks, gates, and
+  release checks" in `.agents/skills/release/SKILL.md`.
 
 ## Conventional Commits
 

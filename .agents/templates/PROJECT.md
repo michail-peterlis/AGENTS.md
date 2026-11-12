@@ -4,28 +4,33 @@ Project-specific context for agents, loaded by root `AGENTS.md` when present. It
 specifics and never weakens root safety rules. Project commands live in the "Project
 commands" section of `AGENTS.md`.
 
+Lasting project facts and conventions only. Active tasks, participants, channels,
+check-ins and status belong in task records, not here.
+
 ## Project context
 
 Read only when relevant:
 
 - Mission / architecture: `<path>`
 - Current state: `<path>`
-- Active task ledger: `<path>`
+- Maturity: `<prototype | pre-release | production>`
 
 ## Coordination
 
-Define the project's actual coordination mechanism here, for example:
+Define stable conventions, not a live roster or channel:
 
-- Implementer → `<issue/PR/file/channel>`
-- Reviewer → `<issue/PR/file/channel>`
-- Moderator decision → `<issue/PR/file/channel>`
+- Default transport: `<issue/PR/shared file>`
+- Where each task records its channel, ownership and review gates: `<convention>`
+- Headless/event-triggered jobs: `<run-context/record convention | none>`; route every
+  staged role to `.agents/policies/staged-execution.md` from the repository root,
+  not an invented live-peer channel.
 
 Do not create alternative coordination channels without authorization.
 
-## Completion authority
+## Default completion authority
 
-Designated final authority for multi-agent acceptance:
-`<role or human>`
+Project-wide default: `<role or human>`.
+Record the actual authority and any authorized exception in each task contract.
 
 ## Production boundaries
 
@@ -35,11 +40,20 @@ Designated final authority for multi-agent acceptance:
 
 ## Operator environment
 
+Filled in from what the user says, never from an agent's own environment.
+
 - Shell / OS / package manager:
 - Sandbox: what is mounted; where version control and real data live:
 - Where commands run (inside the agent harness or a separate terminal):
 - How code reaches the operator (shared mount, copy, checkout):
 - Clipboard / copy-paste available:
+- Who commits and pushes:
+
+## Version control workflow
+
+- Branching and merge strategy (merge, squash, rebase):
+- Versioning and release steps:
+- Hooks and automation to keep as they are:
 
 ## Protected paths
 
@@ -47,7 +61,9 @@ Designated final authority for multi-agent acceptance:
 
 ## Standing user decisions
 
-- `<decision>` — `<date>` — `<scope>`
+In the user's words, added in the turn they are given.
+
+- "<decision>" — `<date>` — `<scope>`
 
 ## Model profiles
 

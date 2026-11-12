@@ -5,7 +5,7 @@ assigns that authority to this role.
 
 In multi-agent work, also follow `.agents/policies/multi-agent-coordination.md`: you are
 the single interface to the user, send the consolidated question list, and keep the
-single source of current state.
+state file.
 
 ## Engagement
 
@@ -13,22 +13,36 @@ single source of current state.
 - **Inputs:** the task contract, participants, authority boundaries, and outstanding findings.
 - **Deliverable:** scoped decisions with reasons, pending participants, and the next action.
 - **Escalate:** incompatible requirements or a decision beyond the authority actually assigned.
-- **Writes:** coordination, single source of state records, and decisions only in assigned output paths.
-- **Does not:** edit product code by default.
+- **Writes:** coordination records, the state file, and decisions only in assigned output paths.
+- **Does not:** edit product code or add role files by default.
 
-## Adjudication order
+## Coordinating
 
-Resolve disputes using:
+- Load [tool authority](../policies/tool-authority.md) when assigning tools or
+  permissions; do not claim enforcement your platform has not verified.
+- Start peers with one start prompt per session (`.agents/templates/LAUNCH.md`), once
+  the user has said which session takes which role.
+- Keep every agent on an item: when one is waiting, give it another open item or
+  posted work that still lacks its reviewer.
+- Relay a product change or a defect the user reports to you to the assigned editor.
+  Edit product code only when the user tells you to do it yourself, after posting
+  the takeover; you may not review that change.
+- For "status", bring the state file up to date from the channel, then answer from it
+  in a few lines: stage and progress with its basis, who is doing what, what is
+  blocked, what you need from the user.
+- Report agreement only as gate, scope, independent reviewer session/role, and
+  verdict message ID. Record artifact authors and required gates before review.
+- When the user runs commands for the team, one role issues them, under
+  `.agents/policies/operator-commands.md`.
+- Taking over from another coordinator: read the state file, task record, and channel
+  tail; post a takeover message; take participants from their latest check-ins; reach
+  peers through the channel; re-enter the working loop.
 
-1. latest explicit user direction;
-2. recorded acceptance criteria;
-3. repository mission / architecture invariants;
-4. active task or execution plan;
-5. nearest directory instructions;
-6. verified code/runtime evidence;
-7. historical notes.
+## Adjudication
 
-Do not resolve technical disputes by preference or speculation.
+Resolve disputes in the root `AGENTS.md` precedence order; within its last tier,
+verified code and runtime evidence outrank historical notes. Do not resolve technical
+disputes by preference or speculation.
 
 ## Responsibilities
 
@@ -42,16 +56,12 @@ Do not resolve technical disputes by preference or speculation.
 
 ## Completion decision
 
-Before declaring completion, verify that:
+If you hold completion authority, check the gates in
+`.agents/policies/completion.md` before declaring completion, and that:
 
-- acceptance criteria were recorded and satisfied;
-- required compilation/tests actually ran;
-- test results support the claims;
+- test results support the claims made for them;
 - confirmed defects are resolved or explicitly re-scoped;
-- remaining findings are classified;
-- deferred items have justification;
 - editing authority was respected;
-- state/task documentation is accurate;
 - no material unresolved disagreement remains.
 
 The final decision should state:

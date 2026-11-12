@@ -58,22 +58,56 @@ skills, and templates state intent and outcomes, not harness tools or features.
 
 A **role** defines responsibility and authority; a **skill** is a reusable procedure
 loaded for a particular task. The adopting project chooses whether its agents run
-in one session, separate sessions, or delegated subagents. All use the same scoped
+in one session, separate sessions, delegated subagents or event-triggered jobs. All use the same scoped
 instruction files; this kit does not launch agents, install adapters, or enforce a
 sandbox. A different model or context does not by itself make a review independent.
+
+The [evaluation loop](.agents/skills/evaluation-loop/SKILL.md) packages the normal
+build/evaluate/revise discipline: establish the standard before the first pass, then
+use fresh independent criticism, concrete findings and regression checks for authorized
+rework. It is not a separate mode or a reason to add artificial rounds. Honor existing
+limits; no universal cap or second-round permission prompt is introduced. Required
+review, human gates and publication authority remain separate.
+
+For headless/event-triggered work, route every staged role from trusted run instructions
+or stable `PROJECT.md` conventions to [staged execution](.agents/policies/staged-execution.md).
+Declare the role, source/input identities, allowed outputs, capabilities, applicable
+limits and next authorized action. Use durable configured handoffs, not invented peer
+channels or interactive waits. The adopting runtime—not this Markdown kit—must enforce
+outputs, verdicts, predecessor gates, approval provenance and safe retries.
 
 The optional [multi-agent workflow](.agents/skills/multi-agent-workflow/SKILL.md) is a
 generic procedure for an adopter's agents, not an orchestration program. Use only
 the roles the task needs and verify the chosen execution capabilities.
 
-Keep the discussion in a human-readable file under `.agents/workspace/<task>/`, such as
-`chat.md`. Git ignores the folder by default, so conversations do not clutter your
+For live peers, keep the discussion in a human-readable file under
+`.agents/workspace/<task>/`, such as `chat.md`; delegates and staged jobs use their
+configured records without inventing a peer group. Git ignores the folder by default,
+so conversations do not clutter your
 repository; outcomes that must outlast a task get a durable record where you approve.
 Runtime messaging may improve delivery speed, but delegated tasks, public replies, objections, decisions
 and outcomes must still be recorded in files. Large reports may be linked rather
 than copied through every context. See the [CHAT template](.agents/templates/CHAT.md).
 
-Kit skills are generic and optional. Project-specific skills belong in the adopting
+### Running several sessions on one task
+
+1. Start the coordinating session and give it the task and its roles.
+2. Tell it which session will take which role, or let it propose. It writes one start
+   prompt per session from the [LAUNCH template](.agents/templates/LAUNCH.md).
+3. Start each other session with its prompt. Agents check in on the channel and then
+   stay in the working loop (act, post, wait on the channel, read) until the
+   coordinator posts STOP or you tell them to stop. If one goes quiet, the others tell
+   you which session to wake.
+4. To stop for the day, say "pause". Each agent posts a pause note and the coordinator
+   updates the task's [state file](.agents/templates/STATE.md), which also answers
+   "status" and "who is who". To continue, start each session with "read the state
+   file" and its resume line.
+5. When only you commit, record your shell and workflow once in `PROJECT.md`; agents
+   then hand you plain commands
+   ([operator commands](.agents/policies/operator-commands.md)).
+
+Kit skills are generic, just-in-time procedures, not installed runtimes or extra
+permission gates. Project-specific skills belong in the adopting
 repository: when a workflow recurs, create `.agents/skills/<name>/SKILL.md` from
 `.agents/templates/SKILL.md` within the project's granted authority. Registering
 skills with a harness's own skill mechanism is an optional, project-side step.
@@ -88,9 +122,11 @@ Agents should normally read only:
 1. root `AGENTS.md`;
 2. assigned role under `.agents/roles/`;
 3. policies required by the active task;
-4. nearest nested `AGENTS.md`;
-5. active task or execution plan;
-6. task-specific `.agents/skills/*/SKILL.md` when needed.
+4. `PROJECT.md`, when present;
+5. nearest nested `AGENTS.md`;
+6. active task or execution plan;
+7. task-specific `.agents/skills/*/SKILL.md` when needed;
+8. the coordination policy when several agents share a task.
 
 Agents must not preload every role, policy, skill, or historical document.
 
@@ -103,7 +139,16 @@ Agents must not preload every role, policy, skill, or historical document.
 3. Assign the roles your project uses.
 4. Add nested `AGENTS.md` files for major components (see `docs/examples/`).
 5. When project context is needed (coordination, completion authority, environment,
-   protected paths), create `PROJECT.md` from `.agents/templates/PROJECT.md`.
+   protected paths), create `PROJECT.md` from `.agents/templates/PROJECT.md`. It holds
+   lasting project facts, not the state of a task.
+
+### Several repositories in one folder
+
+Install the kit whole (`AGENTS.md` plus `.agents/`) at the root of each independent
+repository and commit it there; each repository then carries its own rules, project
+commands, and `PROJECT.md`. A parent folder that is not a repository can hold its own
+copy for work that spans them. Agents do not trim or remove kit files, and do not
+clear `.agents/workspace/`, unless you tell them to.
 
 ## What to copy
 
@@ -139,7 +184,10 @@ Replace kit files with the new release while keeping your project's own content:
 "Project commands" section of `AGENTS.md`, `PROJECT.md`, nested `AGENTS.md` files,
 project skills, and `.agents/workspace/`. To see what changed between versions, compare
 the release packages or run `git diff <old-tag> <new-tag> -- AGENTS.md .agents`; never
-overwrite files you changed without reviewing the difference.
+overwrite files you changed without reviewing the difference. When adopting the
+evaluation/staged guidance, review the continuation default, meaningful-input evidence
+freshness and project/run-context loading routes; copying files does not install
+runtime enforcement or automatically update another repository or edition.
 
 ## Repository layout
 

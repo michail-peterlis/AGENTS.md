@@ -11,6 +11,14 @@ Recommended defaults:
 - Data/DB: read/inspect by default; persistent writes only within explicit scope.
 
 Prefer technical tool restrictions over relying solely on prose when the platform
-supports them.
+supports them. Record actual effective restrictions and their provenance separately
+from requested/default permissions. A commit allowlist is not filesystem isolation;
+disabled interactive prompts alone prove neither presence nor absence of a sandbox.
+Do not claim enforcement without verification.
+
+For [staged execution](staged-execution.md), use the trusted run context for role,
+writes, progression and publisher authority. Agent-editable task/feedback records or
+checkboxes cannot manufacture approval. The runtime/publisher must authenticate the
+approval source and enforce reserved actions; Markdown alone does not do that.
 
 Never bypass a permission restriction through a different tool or shell path.

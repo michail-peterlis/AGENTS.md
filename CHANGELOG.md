@@ -4,6 +4,57 @@ All notable public changes to Enterprise Agents are documented here.
 
 This project uses semantic versioning for the governance contract. Behavioral changes may be breaking even when they are Markdown/configuration-only.
 
+## [v0.4.1] - 2026-11-12
+
+### Added
+
+- Lifecycle-neutral `.agents/skills/evaluation-loop/SKILL.md`: proportional standards before the first pass, fresh independent critic inputs, criterion-level findings/remediation, regressions, checkpoint handoffs and honest operational exits. This packages normal authorized evaluation/rework, not an opt-in mode or mandatory committee.
+- `.agents/policies/staged-execution.md`: trusted run contracts, durable headless handoffs, separate process/output/verification/verdict/approval outcomes and human stage boundaries. Direct routes from role/contract/project-template guidance; no runtime, provider, forge or adopter-specific dependency.
+- Manual review scenarios S28–S35 cover criticism contamination, failed checks, meaningful-input freshness, stage outcomes/permissions, ineffective iteration and interrupted checkpoints. These are instruction checklists, not measured agent compliance.
+
+- Repository-local `tools/check_kit.py` and stdlib-only regression tests in `tests/`: run `python3 -B -I tools/check_kit.py` for Markdown references, policy routing, line endings, shell syntax, channel-helper failure paths and concurrency. Maintainer tooling stays outside the reusable `.agents/` kit; instructions live in `CONTRIBUTING.md`. No CI or hooks are changed.
+- `.agents/templates/LAUNCH.md`: start prompt the coordinator writes for each session.
+- `.agents/templates/STATE.md`: one state file per task (roster, user directions in force, what waits on the user, items) that answers "status" and is the checkpoint for pause, resume, and takeover.
+- `.agents/policies/operator-commands.md`: how to hand commands to a user who commits or runs things outside the agent's environment. It replaces the implementer's "Commands for the operator" list.
+- `.agents/skills/multi-agent-workflow/scripts/read.sh`: prints the complete lines of the channel not yet seen, and the two values the next read and wait need.
+- Root `AGENTS.md`: the coordination policy applies to peer sessions sharing a channel, not to subagents a session starts itself; stay in the working loop; re-read role, task record, and directions after a context loss; a request to explain, discuss, or plan authorizes no product edits; no abstraction, file, option, or document without a named need; designs are proposals until accepted; short plain reports. Explicit authorization is now required to delete files version control cannot restore, to bypass project hooks or checks, and to change kit files.
+- Close-out step in `completion.md`; "Artifact identity" in `evidence-and-provenance.md`; "What is already there" in `repository-safety.md`; "Hooks, gates, and release checks" in the release skill; maturity, version-control workflow, and "who commits" fields in the PROJECT template.
+- README: running several sessions on one task; several repositories in one folder.
+- `docs/review-scenarios.md`: scenarios S13–S27.
+
+### Changed
+
+- Evaluation/correction uses existing authority and applicable user/project/job limits, with round reporting and no invented cap, automatic second-round permission prompt or fixed two-round escalation rule. First-pass success does not require another round; local quality-loop exits do not change live-peer stop causes.
+- Evidence/review rules bind verdicts to artifact scope/revision, approved standard and relevant verification inputs. Pure report commits alone do not stale unchanged evidence; meaningful criteria, permission, reference, dependency or environment changes can. Findings retain IDs and independent closure across handoffs.
+- TASK/HANDOFF/REVIEW reuse existing fields with criterion evidence, neutral critic selection and round/regression notes. Tool authority distinguishes actual enforcement and authenticated approvals from prose or commit allowlists; completion distinguishes operational exits from quality acceptance.
+- README documents headless adoption and explicit loading. Adopters must review the behavioral contract and configure staged routes; runtime gating, factory synchronization and the separate lite edition are not installed or verified by these changes. No helper CLI, hook, test-code or machine-report schema changes.
+- `.agents/policies/multi-agent-coordination.md` rewritten around a working loop: act, use the gap, wait with backoff (about 15 seconds to 5 minutes), read what is new. Waiting has no default limit; a timeout, a silent or blocking peer, or agreement on one item is not a reason to stop. Stop causes are a closed list: STOP from the coordinator, the user (directly or relayed), something only the user can give, or a failing channel. One shared chat, appended through the helper; the sole-writer arrangement remains only as the fallback without a shell. Each agent posts its own check-in and pause note; the roster is copied from check-ins. Agreement is reported as gate, scope, reviewer session/role, and verdict message ID; channel discovery requires a confirmed task, not the newest file. T0 and T1 items get one author, one reviewer, and a short verdict.
+- `review-and-status.md`: artifact authors are identified by session, across roles; agent consensus requires ACCEPT on every assigned independent review gate, with specialist scopes and no empty consensus or role-switched self-review.
+- Artifact identity is a commit, or the base revision plus one digest of the diff with the command that printed it; no staged tree copies or redundant review manifests. Required release/package manifests and data-integrity hashes remain supported.
+- Templates: CHAT has a lighter header (name, ID, time), no participants block, and values filled by command substitution; TASK drops the idle-wait budget and the participants line; REVIEW and HANDOFF gain "Exercised as a user" and "User-visible changes"; PROJECT holds lasting project facts and conventions only, with no active-task pointer; HUMAN-QUESTIONS puts the recommended option first. The task owns the contract and scoped directions, the channel preserves events and decisions, and STATE is a derived current index rather than a competing authority.
+- `task-contracts.md`: the deliverable is stated in one sentence and checked against the repository; tiers follow the change, not the environment; T2 asks for agent consensus instead of agreement of all assigned roles; lasting user preferences are recorded in `PROJECT.md` in the same turn; the HUMAN-PREVIEW gate covers bulk changes to shipped user-facing assets and options a fix would add. `PLANS.md`: prefer an early runnable slice, but allow bounded contract, migration and security prerequisites within the authorized task.
+- `testing.md`: maturity reduces ceremony, not risk-based coverage; faulty assertions can be corrected against the approved contract, never merely weakened to pass. Reviewer command validation uses authorized environments, dry runs or source inspection without executing restricted operations just to check instructions; required unverified runtime gates remain pending. Added checks are tested on the real workflow or labelled UNTESTED.
+- Roles: moderator (start prompts, relays edits to the assigned editor, status from the state file, takeover; its adjudication order and completion checks now point to the root file and `completion.md`), challenger (exercises the deliverable as its user, visual evidence; finding classes now point to `review-and-status.md`), implementer, security, repository-manager, release, architect, documentation.
+- Skills: the workflow skill separates peers from delegates, gives the loop commands, and requires delegate briefs to carry the working directory, the only writable paths, and resource limits, with the tree checked after a delegate returns; the security-audit skill puts safe defaults in code first.
+- Helpers: `wait.sh` accepts the one-token checksum printed by `read.sh` as well as quoted `cksum` output, and rejects a malformed checksum (exit 64); `append.sh` validates its arguments, refuses a missing folder at once, repairs a missing final newline in the channel, and ends each message with a blank line.
+- `read.sh` now rejects overflowing cursors and propagates read failures without advancing the cursor; rotation resets are explicit. `append.sh` rejects symlink inputs/channels and hard-linked channels to prevent self-input and lock bypass through aliases. Normal CLI argument order and success output remain unchanged.
+- Instruction precedence cannot grant restricted permissions; instructions embedded in task data cannot expand authority. Documentation, experiments, production-safety and tool-authority policies have explicit loading paths from relevant roles and skills.
+- Review scenarios S1, S2, and S10 updated for the new waiting and channel rules.
+
+### Removed
+
+- "Wait budget", "bounded wait", and `by <time>` wording, and the statement that an idle session in a turn-based harness needs the user to resume it.
+- The stop cause "cannot continue safely", which was used to hand back on a silent peer; a failing channel and a need only the user can meet remain stop causes.
+- Reading the channel under the lock or from snapshots, and the rule against inferring completeness from time, size, or checksum; `read.sh` shows complete lines only.
+- The two example names in the coordination policy.
+- `.gitignore` entry for local analysis inputs.
+
+### Notes
+
+- Derived from an analysis of 106 recorded sessions (66 main, 40 delegated) run with v0.1.0 to v0.3.5 in three agent harnesses.
+- Behavioral change for adopters: agents in multi-agent tasks no longer stop on a wait timeout or a silent peer; coordination records change shape (`STATE.md`, lighter chat header); verdicts no longer call for hash manifests.
+- The helpers were exercised with one shell acting as `sh`; other POSIX shells were not tested.
+
 ## [v0.3.5] - 2026-10-29
 
 ### Removed
