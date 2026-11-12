@@ -22,7 +22,16 @@ Before substantive implementation, record:
 - known unresolved questions.
 
 A task contract should be specific enough that another agent can determine whether
-the work is complete without relying on the Implementer's intent.
+the work is complete without relying on the Implementer's intent. Establish the
+inspectable standard and required evidence per criterion before the first pass.
+Authorized correction after failed evaluation follows the
+[evaluation loop](../skills/evaluation-loop/SKILL.md), scaled to any tier; this does
+not require a new mode invitation or widen existing authority. Record approved
+standard/deviation changes explicitly rather than silently moving the bar.
+
+For a headless/event-triggered run, load [staged execution](staged-execution.md).
+Use the existing stage/revision, authority, scope, verification and resource fields
+to record the run context and handoff; a job does not imply a live peer channel.
 
 ## Proportionality
 

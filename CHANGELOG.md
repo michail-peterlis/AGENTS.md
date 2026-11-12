@@ -4,9 +4,13 @@ All notable public changes to Enterprise Agents are documented here.
 
 This project uses semantic versioning for the governance contract. Behavioral changes may be breaking even when they are Markdown/configuration-only.
 
-## [Unreleased]
+## [v0.4.1] - 2026-11-12
 
 ### Added
+
+- Lifecycle-neutral `.agents/skills/evaluation-loop/SKILL.md`: proportional standards before the first pass, fresh independent critic inputs, criterion-level findings/remediation, regressions, checkpoint handoffs and honest operational exits. This packages normal authorized evaluation/rework, not an opt-in mode or mandatory committee.
+- `.agents/policies/staged-execution.md`: trusted run contracts, durable headless handoffs, separate process/output/verification/verdict/approval outcomes and human stage boundaries. Direct routes from role/contract/project-template guidance; no runtime, provider, forge or adopter-specific dependency.
+- Manual review scenarios S28–S35 cover criticism contamination, failed checks, meaningful-input freshness, stage outcomes/permissions, ineffective iteration and interrupted checkpoints. These are instruction checklists, not measured agent compliance.
 
 - Repository-local `tools/check_kit.py` and stdlib-only regression tests in `tests/`: run `python3 -B -I tools/check_kit.py` for Markdown references, policy routing, line endings, shell syntax, channel-helper failure paths and concurrency. Maintainer tooling stays outside the reusable `.agents/` kit; instructions live in `CONTRIBUTING.md`. No CI or hooks are changed.
 - `.agents/templates/LAUNCH.md`: start prompt the coordinator writes for each session.
@@ -20,6 +24,10 @@ This project uses semantic versioning for the governance contract. Behavioral ch
 
 ### Changed
 
+- Evaluation/correction uses existing authority and applicable user/project/job limits, with round reporting and no invented cap, automatic second-round permission prompt or fixed two-round escalation rule. First-pass success does not require another round; local quality-loop exits do not change live-peer stop causes.
+- Evidence/review rules bind verdicts to artifact scope/revision, approved standard and relevant verification inputs. Pure report commits alone do not stale unchanged evidence; meaningful criteria, permission, reference, dependency or environment changes can. Findings retain IDs and independent closure across handoffs.
+- TASK/HANDOFF/REVIEW reuse existing fields with criterion evidence, neutral critic selection and round/regression notes. Tool authority distinguishes actual enforcement and authenticated approvals from prose or commit allowlists; completion distinguishes operational exits from quality acceptance.
+- README documents headless adoption and explicit loading. Adopters must review the behavioral contract and configure staged routes; runtime gating, factory synchronization and the separate lite edition are not installed or verified by these changes. No helper CLI, hook, test-code or machine-report schema changes.
 - `.agents/policies/multi-agent-coordination.md` rewritten around a working loop: act, use the gap, wait with backoff (about 15 seconds to 5 minutes), read what is new. Waiting has no default limit; a timeout, a silent or blocking peer, or agreement on one item is not a reason to stop. Stop causes are a closed list: STOP from the coordinator, the user (directly or relayed), something only the user can give, or a failing channel. One shared chat, appended through the helper; the sole-writer arrangement remains only as the fallback without a shell. Each agent posts its own check-in and pause note; the roster is copied from check-ins. Agreement is reported as gate, scope, reviewer session/role, and verdict message ID; channel discovery requires a confirmed task, not the newest file. T0 and T1 items get one author, one reviewer, and a short verdict.
 - `review-and-status.md`: artifact authors are identified by session, across roles; agent consensus requires ACCEPT on every assigned independent review gate, with specialist scopes and no empty consensus or role-switched self-review.
 - Artifact identity is a commit, or the base revision plus one digest of the diff with the command that printed it; no staged tree copies or redundant review manifests. Required release/package manifests and data-integrity hashes remain supported.

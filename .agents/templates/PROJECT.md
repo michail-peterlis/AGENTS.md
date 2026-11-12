@@ -21,6 +21,9 @@ Define stable conventions, not a live roster or channel:
 
 - Default transport: `<issue/PR/shared file>`
 - Where each task records its channel, ownership and review gates: `<convention>`
+- Headless/event-triggered jobs: `<run-context/record convention | none>`; route every
+  staged role to `.agents/policies/staged-execution.md` from the repository root,
+  not an invented live-peer channel.
 
 Do not create alternative coordination channels without authorization.
 

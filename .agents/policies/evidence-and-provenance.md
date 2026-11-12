@@ -22,7 +22,18 @@ Name what is under review by the cheapest stable identity:
   with the one command that printed it; the command must cover new files;
 - for a file outside version control, its path plus hash.
 
-Review in place and recompute the digest when the work changes. Do not create
+Review in place and recompute the digest when the work changes. A verdict binds its
+stated artifact scope/revision, approved standard revision, and relevant verification
+inputs/conditions, including dependencies and configuration. Do not narrow scope to
+convenient files while omitting inputs that can change the result.
+
+A pure report-publishing commit preserves evidence only if these evaluated inputs
+are unchanged; name the evaluated revision, not the report's own future commit ID.
+Changed task/feedback criteria, permissions, commands, references, dependencies or
+environment can stale affected evidence without a product-source edit. Reassess the
+affected gates; branch-head movement alone neither invalidates nor refreshes a verdict.
+
+Do not create
 per-revision manifests, hashes of manifests, or per-file hash lists solely for review
 bookkeeping. This does not prohibit release/package manifests, dataset lineage, or
 integrity hashes required by an accepted contract. Keep a review snapshot only when

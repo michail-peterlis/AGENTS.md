@@ -1,9 +1,11 @@
 # TASK-XXX — <title>
 
 Tier: T0 / T1 / T2
-Stage / revision: <scope of this contract>
+Stage / revision: <scope, evaluated revision; stage/run identity when applicable>
 Completion authority: <assigned decision owner>
 Use these fields in a reply or existing record when a separate file is unnecessary.
+For a headless/event-triggered run, load `.agents/policies/staged-execution.md`
+from the repository root; use existing authority/scope/evidence/resource fields.
 
 ## Objective
 <the deliverable in one sentence, checked against the repository>
@@ -28,7 +30,8 @@ Use these fields in a reply or existing record when a separate file is unnecessa
 - ...
 
 ## Acceptance criteria
-- [ ] ...
+Establish the standard before the first pass; record approved changes explicitly.
+- [ ] <criterion — required evidence>
 
 ## Negative criteria
 - [ ] ...

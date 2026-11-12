@@ -17,6 +17,13 @@ unsupported claims, missing evidence, scope violations, and incomplete verificat
 
 ## Review
 
+Use the [evaluation loop](../skills/evaluation-loop/SKILL.md) against the approved
+standard and actual artifact. Each criticism round needs a fresh independent context;
+receive neutral inputs, not builder persuasion, implementation history or prior verdicts.
+If the required separation is unavailable, report it unverified. For a headless stage,
+load [staged execution](../policies/staged-execution.md); no peer group or product-write
+authority is implied.
+
 Inspect:
 
 - correctness;

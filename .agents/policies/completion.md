@@ -20,7 +20,12 @@ Before completion, confirm as applicable:
 - close-out done (below);
 - designated completion authority issued a decision.
 
-If required work remains, the task is not COMPLETE.
+If required work remains, the task is not COMPLETE. Process exit, required outputs,
+verification, independent verdict and human progression/publication approval are
+separate, as in [staged execution](staged-execution.md). A budget/cancellation exit or
+best partial checkpoint is not quality success; retain criterion results, unresolved
+findings and the next authorized action. REVIEW PENDING is appropriate when a required
+evaluation belongs to a later authorized stage, not permission to launch that stage.
 
 Close-out: list everything the task created that is not the deliverable (files,
 copies, logs, captures, installed packages, running processes), wherever it is, each

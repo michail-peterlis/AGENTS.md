@@ -14,11 +14,17 @@ Use precise classifications.
 - **BLOCKED** — progress depends on an external decision/resource.
 - **SUPERSEDED** — replaced by newer authoritative direction.
 
-Every finding should state evidence and resolution conditions.
+Every finding should state evidence and resolution conditions. In a review/correction
+cycle, retain stable finding IDs, criterion or safety basis, impact/priority and owning
+editor. Record correction, evidence-backed rebuttal or authorized deviation and the
+revised identity; independently verify closure and carry open findings across handoffs.
+Material safety/integrity findings are not discarded because a criterion omitted them.
 
 ## Role verdicts
 
-A role's verdict always names an artifact identity and the scope it covers:
+A role's verdict always names an artifact identity and the scope it covers, including
+the approved standard and relevant verification inputs under
+[evidence freshness](evidence-and-provenance.md):
 
 - **ACCEPT** — this role finds the artifact satisfies its contract;
 - **HOLD** — this role blocks it; state the finding;
@@ -39,6 +45,11 @@ stated gate, not unrelated parts of the artifact. Missing gates or reviewers rem
 pending; an empty set of reviewers is not consensus. Changes require fresh review of
 affected gates. Reviewers may explicitly reaffirm unchanged scopes on the new identity
 without rerunning unrelated checks; a coordinator cannot reaffirm on their behalf.
+
+A process exit, produced report, passing check, reviewer verdict and human approval
+are distinct outcomes, especially in [staged jobs](staged-execution.md). None supplies
+the others. A failing required check or insufficient required evidence remains open;
+model preference cannot turn it into acceptance.
 
 Consensus is not task acceptance: only the designated completion authority records a
 task as ACCEPTED. Report it as gate, scope, reviewer session/role, and verdict record.

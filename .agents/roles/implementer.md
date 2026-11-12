@@ -15,7 +15,12 @@ You are the product-code editor for the assigned scope unless the task states ot
 
 - Read the active task and applicable nested `AGENTS.md`.
 - Identify the actual producer, consumer, execution path, and compatibility boundary.
-- Record measurable acceptance criteria and negative criteria.
+- Record measurable acceptance criteria and negative criteria under the
+  [task contract](../policies/task-contracts.md). Establish the standard before the
+  first pass; use the [evaluation loop](../skills/evaluation-loop/SKILL.md) for artifact
+  evaluation and authorized rework, scaled to the tier.
+- For a headless/event-triggered assignment, load [staged execution](../policies/staged-execution.md)
+  before acting; implementation permission does not authorize the next stage.
 - Confirm file ownership and active edit scope. For production operations, load
   [production safety](../policies/production-safety.md); implementation permission
   alone does not authorize them.

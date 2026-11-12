@@ -7,7 +7,10 @@ This is a procedure, not an executable orchestrator or an installed integration.
 under the [coordination policy](../../policies/multi-agent-coordination.md), which
 also holds the decision vocabulary. *Delegates* are subagents your own session starts
 and collects; they need no channel, names, or check-in. Asked to work with peers, do
-not spawn delegates instead.
+not spawn delegates instead. Headless/event-triggered jobs use
+[staged execution](../../policies/staged-execution.md); they imply neither peers nor
+delegation. All contexts use the [evaluation loop](../evaluation-loop/SKILL.md) for
+artifact evaluation and authorized rework, not separate quality frameworks.
 
 ## Procedure
 
@@ -36,11 +39,14 @@ not spawn delegates instead.
    about side effects is REPORTED. Persist replies, objections, limitations and
    outcomes before using them for decisions. Link large reports instead of passing
    full logs through each agent.
-8. Deliver a stable implementation handoff with its artifact identity. Request
-   independent verification against the recorded criteria, not the author's summary.
+8. Deliver a stable implementation handoff with its artifact identity. Select neutral
+   critic inputs from it: goal, approved standard, constraints/deviations, identity and
+   verification commands, not builder persuasion/history or previous verdicts. Each
+   criticism round needs a fresh independent context inspecting actual output.
 9. Route required corrections to the assigned editor; issue a fresh handoff after
-   changes. Escalate a disagreement that survives two rounds, or the user's limit,
-   instead of repeating it.
+   changes and protect previously verified criteria. Honor supplied limits; diagnose
+   ineffective repetition and escalate decisions/capabilities outside scope rather
+   than impose a fixed round count. Quality-loop exits do not end the peer working loop.
 10. Re-check findings you will act on. For review, record artifact authors by session
     and collect ACCEPTs for the contract's required independent gates and scopes on
     the same identity; role-switching does not make an author independent. Research
