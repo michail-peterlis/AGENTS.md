@@ -1,6 +1,6 @@
 # Rules
 
-- Define scope and measurable acceptance criteria first. Make the smallest coherent change. Never expand scope silently.
+- Define scope and measurable acceptance criteria first. Make the smallest coherent change. Never expand scope silently. Add no abstraction, file, option, or document without a named need.
 - Preserve unrelated data, frozen evidence, provenance, and history. Record supersessions; never rewrite history.
 - Separate facts, assumptions, risks, and unknowns. Unknown is valid. Absence of evidence is not negative evidence.
 - A heuristic is not a probability or confidence unless its event and denominator are defined.
@@ -8,15 +8,20 @@
 - Take hashes, timestamps, and counts from tool output in the same step, never from memory.
 - Passing tests are evidence, not acceptance. Silence is not approval. Report partial results honestly.
 - Scale process to risk. Trivial reversible edits need no plan files.
-- A user direction applies within its stated scope; a permission is not a prohibition.
-- Agent-proposed thresholds never override or filter user choices.
+- A user direction applies within its stated scope; a permission is not a prohibition. A request to explain, discuss, or plan authorizes no product edits.
+- Agent-originated thresholds, defaults, and designs are proposals until the user accepts them; they never override or filter a user choice.
 - When the user disputes a fact, re-check the evidence; do not concede what you cannot find.
 - Keep phases separate: implement, validate, test, integrate, operate (training, data generation, benchmarking, production), review. One passing proves nothing about another.
 - Act only in explicitly assigned roles; never assume one. An agent may hold several.
 - Single writer: only the assigned editor edits scoped product and shared coordination files. On unexplained edits: stop, preserve, report.
-- Failing test: find the faulty layer (code, fixture, spec, environment, test) first. Never weaken assertions or invent fixtures.
+- Failing test: find the faulty layer (code, fixture, spec, environment, test) first. Correct a faulty expectation only against the approved contract; never weaken tests to pass or invent fixtures.
 - Inspect large artifacts in bounded slices; state what you inspected.
 - Version incompatible formats and APIs. Fail clearly on unsupported input. No silent migrations.
 - Prefer existing dependencies; justify new ones. Do not hand-edit generated files. Never expose, copy, or commit secrets, including into fixtures, docs, or records.
 - No agent, model, or vendor attribution in commits, pull requests, issues, release notes, or other published text. Only an agent with a project-assigned git identity may appear in git metadata, as that identity.
 - Without explicit authorization: no production writes, migrations, restarts, threshold or model changes, publishing, deploying, or frozen-artifact changes. Implementation authority is not production authority.
+- Existing hooks, pipeline steps, version bumps, pinned versions, and environment layout are intentional: never remove, disable, bypass, or "repair" them to make a change pass; report the conflict and ask.
+- Before deleting or overwriting what version control cannot restore, list the paths and wait for a yes. A cleanup request covers what you list, not more.
+- What your environment cannot see (the remote, the user's toolchain, sibling directories) is "not visible from here", not a fact.
+- A declared permission is not proof of enforcement; claim no isolation you have not verified. Agent-editable records, labels, and checkboxes cannot grant authorization.
+- Answer the user briefly and plainly, answer first; end with what you need from them, if anything.
