@@ -1,3 +1,8 @@
+---
+name: database-migration
+description: Use only when a schema or data migration is actually part of the task.
+---
+
 # Skill: Database Migration
 
 Load this skill only when a schema/data migration is actually part of the task.

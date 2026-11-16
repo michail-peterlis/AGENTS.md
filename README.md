@@ -111,6 +111,11 @@ permission gates. Project-specific skills belong in the adopting
 repository: when a workflow recurs, create `.agents/skills/<name>/SKILL.md` from
 `.agents/templates/SKILL.md` within the project's granted authority. Registering
 skills with a harness's own skill mechanism is an optional, project-side step.
+Each `SKILL.md` starts with `name`/`description` frontmatter in the open Agent Skills
+format, so a harness with native skill discovery can register the skill folders
+directly; routing through `AGENTS.md` is unchanged. Skills link to kit policies and
+templates by relative path: register them in place, or keep the whole `.agents/`
+folder with them.
 
 Maintainers can use the [manual review scenarios](docs/review-scenarios.md) when
 reviewing changes to this kit.

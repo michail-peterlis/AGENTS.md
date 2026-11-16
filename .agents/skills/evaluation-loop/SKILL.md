@@ -1,3 +1,8 @@
+---
+name: evaluation-loop
+description: Use for artifact evaluation and authorized correction after a failed review, at any contract tier. Not for status reports or commit preparation.
+---
+
 # Skill: Evaluation Loop
 
 Load for artifact evaluation and authorized correction after a failed review, at any

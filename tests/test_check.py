@@ -68,6 +68,67 @@ class KitCheck(unittest.TestCase):
         findings = checker.static_findings(self.root)
         self.assertTrue(any("escapes repository" in finding for finding in findings), findings)
 
+    def skill(self, directory, *lines, text=None):
+        if text is None:
+            text = "---\n" + "".join(line + "\n" for line in lines) + "---\n\n# Skill: Example\n"
+        path = self.put(f".agents/skills/{directory}/SKILL.md", text)
+        try:
+            return checker.static_findings(self.root)
+        finally:
+            path.unlink()
+
+    def test_valid_skill_frontmatter(self):
+        self.put(".agents/templates/SKILL.md", "---\nname: <skill-directory-name>\n"
+                 "description: <when to use this skill>\n---\n")
+        name = "name: example"
+        for directory, lines in (
+            ("example", (name, "description: Use when testing the checker.")),
+            ("example", ('name: "example"', 'description: "Use for x: y, not #1."')),
+            ("example", (name, r'description: "Use when printing \"x: y\"."')),
+            ("example", (name, r'description: "Use when reading C:\\temp: examples."')),
+            ("example", (name, r'description: "Use for caf\u00e9 menus."')),
+            ("a" * 64, ("name: " + "a" * 64, "description: " + "x" * 200)),
+        ):
+            with self.subTest(lines=lines):
+                self.assertEqual(self.skill(directory, *lines), [])
+
+    def test_skill_frontmatter_failures(self):
+        name, description = "name: example", "description: Use when testing."
+        body = "name: example\ndescription: Use.\n---\n"
+        for directory, lines, text, expected in (
+            ("example", (), "# Skill: Example\n", "first line must be ---"),
+            ("example", (), "\n---\n" + body, "first line must be ---"),
+            ("example", (), "﻿---\n" + body, "first line must be ---"),
+            ("example", (), "---\nname: example\ndescription: Use.\n", "no closing ---"),
+            ("example", (description,), None, "has no name"),
+            ("example", ("name: other", description), None, "does not match its directory"),
+            ("-example", ("name: -example", description), None, "must be 1-64"),
+            ("example-", ("name: example-", description), None, "must be 1-64"),
+            ("ex--ample", ("name: ex--ample", description), None, "must be 1-64"),
+            ("Upper", ("name: Upper", description), None, "must be 1-64"),
+            ("a" * 65, ("name: " + "a" * 65, description), None, "must be 1-64"),
+            ("example", (name,), None, "has no description"),
+            ("example", (name, "description:"), None, "description is empty"),
+            ("example", (name, 'description: ""'), None, "description is empty"),
+            ("example", (name, "description: " + "x" * 201), None, "longer than 200"),
+            ("example", (name, "description: Use <here>."), None, "< or >"),
+            ("example", (name, "description: Use when a > b."), None, "< or >"),
+            ("example", (name, "description: Use for x: y."), None, "double-quoted"),
+            ("example", (name, "description: Use for #1."), None, "double-quoted"),
+            ("example", (name, 'description: "Use.'), None, "double-quoted"),
+            ("example", (name, r'description: "Use.\"'), None, "double-quoted"),
+            ("example", (name, 'description: "Use "x" here."'), None, "double-quoted"),
+            ("example", (name, r'description: "Use \x41 here."'), None, "double-quoted"),
+            ("example", (name, r'description: "Use\nhere."'), None, "double-quoted"),
+            ("example", (name, r'description: "Use <here>."'), None, "< or >"),
+            ("example", (name, "description: |", "  Use."), None, "double-quoted"),
+            ("example", (name, "description: Use", "  when testing."), None, "`key: value`"),
+            ("example", (name, description, description), None, "duplicate frontmatter key"),
+        ):
+            with self.subTest(directory=directory, lines=lines, text=text):
+                findings = self.skill(directory, *lines, text=text)
+                self.assertTrue(any(expected in finding for finding in findings), findings)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -1,3 +1,8 @@
+---
+name: dependency-upgrade
+description: Use when adding or upgrading a dependency.
+---
+
 # Skill: Dependency Upgrade
 
 Load for dependency additions/upgrades.

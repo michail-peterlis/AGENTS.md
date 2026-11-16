@@ -4,6 +4,25 @@ All notable public changes to Enterprise Agents are documented here.
 
 This project uses semantic versioning for the governance contract. Behavioral changes may be breaking even when they are Markdown/configuration-only.
 
+## [v0.4.2] - 2026-11-16
+
+### Added
+
+- `name`/`description` frontmatter in the open Agent Skills format at the top of every `.agents/skills/*/SKILL.md` and of `.agents/templates/SKILL.md`. Each `name` equals its skill's directory; each `description` is taken from the skill's existing trigger line.
+- `tools/check_kit.py` checks the frontmatter of every kit skill (not the template): `---` on the first line and a closing `---`, `key: value` lines only, `name` equal to the directory, 1–64 lowercase letters or digits in hyphen-separated words, and a one-line `description` of at most 200 characters without `<` or `>`, double-quoted if it contains `:` or `#` (JSON escapes inside the quotes). It reads this subset with the standard library, not a YAML parser. `tests/test_check.py` covers a valid skill and each failure.
+
+### Changed
+
+- README: skills carry frontmatter, so a harness with native skill discovery can register the skill folders directly. Skills link to kit files by relative path, so register them in place or keep the whole `.agents/` folder with them.
+- CONTRIBUTING: the frontmatter rules for `SKILL` contributions; the checker description includes skill frontmatter.
+- The `Validate PR` workflow runs `python3 -B -I tools/check_kit.py`, so the checker and its tests now gate pull requests to `main`. The shell-syntax and changelog gates are unchanged.
+
+### Notes
+
+- Skill bodies and routing through `AGENTS.md` are unchanged. A harness that reads `SKILL.md` as plain Markdown sees five extra lines at the top.
+- Harnesses with native skill discovery may now list these skills and select them by their descriptions, in addition to `AGENTS.md` routing. Discovery is not guaranteed in every harness; some need project-side registration.
+- The `lite` edition is not changed by this entry.
+
 ## [v0.4.1] - 2026-11-12
 
 ### Added

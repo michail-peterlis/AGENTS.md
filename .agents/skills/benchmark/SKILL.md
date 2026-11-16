@@ -1,3 +1,8 @@
+---
+name: benchmark
+description: Use when measuring performance, memory, throughput, size, or model quality.
+---
+
 # Skill: Benchmark
 
 Load when measuring performance, memory, throughput, size, or model quality.

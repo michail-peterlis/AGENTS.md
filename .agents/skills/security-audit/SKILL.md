@@ -1,3 +1,8 @@
+---
+name: security-audit
+description: Use for an explicit security review.
+---
+
 # Skill: Security Audit
 
 Load for explicit security review.

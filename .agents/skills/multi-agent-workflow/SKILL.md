@@ -1,3 +1,8 @@
+---
+name: multi-agent-workflow
+description: Use for a task that benefits from explicit delegation or independent review, whether with peer sessions or delegated subagents.
+---
+
 # Skill: Multi-Agent Workflow
 
 Use for a task that benefits from explicit delegation or independent review.
