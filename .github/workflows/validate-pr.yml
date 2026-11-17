@@ -30,6 +30,9 @@ jobs:
             echo "All scripts passed syntax validation."
           fi
 
+      - name: Run kit checker
+        run: python3 -B -I tools/check_kit.py
+
       - name: Enforce CHANGELOG update
         env:
           BASE_SHA: ${{ github.event.pull_request.base.sha }}

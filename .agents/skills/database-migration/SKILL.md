@@ -1,3 +1,8 @@
+---
+name: database-migration
+description: Plans and tests a schema or data migration, including rollback, idempotency and old/new compatibility. Use only when a migration is actually part of the task.
+---
+
 # Skill: Database Migration
 
 Load this skill only when a schema/data migration is actually part of the task.

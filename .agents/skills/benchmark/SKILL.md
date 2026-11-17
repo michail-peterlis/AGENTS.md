@@ -1,3 +1,8 @@
+---
+name: benchmark
+description: Runs reproducible measurements against a pinned baseline and preserves the raw data. Use when measuring performance, memory, throughput, size, or model quality.
+---
+
 # Skill: Benchmark
 
 Load when measuring performance, memory, throughput, size, or model quality.

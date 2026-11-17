@@ -52,6 +52,15 @@ harness, model, or tool. State the required outcome and a fallback for harnesses
 lack the capability. Harness-specific notes belong in `COMPAT` issues or project
 extensions.
 
+Every `SKILL` contribution starts its `.agents/skills/<name>/SKILL.md` with `name` and
+`description` frontmatter in the open Agent Skills format, as in
+`.agents/templates/SKILL.md`: `---` on the first line and a closing `---`, LF line
+endings; `name` equals the directory name and is 1–64 lowercase letters or digits in
+hyphen-separated words; `description` is one line of at most 200 characters that says
+what the skill does and when to use it (and when not to, where that matters), contains
+no `<` or `>`, and is double-quoted if it contains `:` or `#`. Inside double quotes, use JSON escapes such as `\"` and `\\`. The checker
+enforces these rules.
+
 When changing coordination, review, or privacy rules, re-check the
 [manual review scenarios](docs/review-scenarios.md).
 
@@ -63,9 +72,11 @@ Run from the repository root:
 python3 -B -I tools/check_kit.py
 ```
 
-The checker validates local Markdown references, policy reference paths, line endings
-and shell syntax in `AGENTS.md` and `.agents/`, excluding workspace records, then runs
-`tests/`. It requires Python 3.9+ (standard library only), `sh` and POSIX system tools.
+The checker validates local Markdown references, policy reference paths, skill
+frontmatter, line endings and shell syntax in `AGENTS.md` and `.agents/`, excluding
+workspace records, then runs `tests/`. The `Validate PR` workflow runs it on every pull
+request to `main`. It requires Python 3.9+ (standard library only), `sh` and POSIX
+system tools.
 Tests create disposable fixtures at the repository root and remove them on cleanup.
 This checks the kit and helpers, not an adopting project's code or agent compliance;
 also walk the manual review scenarios for changed governance behavior.

@@ -1,3 +1,8 @@
+---
+name: <skill-directory-name>
+description: <what this skill does and when to use it, one line, 200 characters or fewer>
+---
+
 # Skill: <name>
 
 Load when <the task pattern that triggers this workflow>.

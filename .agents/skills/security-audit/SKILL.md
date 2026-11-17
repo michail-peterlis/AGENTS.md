@@ -1,3 +1,8 @@
+---
+name: security-audit
+description: Reviews trust boundaries, untrusted inputs, secrets and dependencies, and reports findings without exposing sensitive values. Use for an explicit security review.
+---
+
 # Skill: Security Audit
 
 Load for explicit security review.

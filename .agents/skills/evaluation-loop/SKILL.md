@@ -1,3 +1,8 @@
+---
+name: evaluation-loop
+description: Checks an artifact against an approved standard with independent critics and guides authorized rework. Use for evaluation or rework after a failed review. Not for status reports or commit preparation.
+---
+
 # Skill: Evaluation Loop
 
 Load for artifact evaluation and authorized correction after a failed review, at any
