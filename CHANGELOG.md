@@ -4,6 +4,13 @@ All notable public changes to Enterprise Agents are documented here.
 
 This project uses semantic versioning for the governance contract. Behavioral changes may be breaking even when they are Markdown/configuration-only.
 
+## [v0.4.7] - 2026-11-17
+
+### Changed
+
+- The Release workflow refuses a stale `lite`: it fails unless the latest `lite` commit ends with `Derived-from: <main commit>`, that commit is in the history of the released `main` commit, and `main` has not changed `AGENTS.md` or `.agents/` since. It does not compare the condensed content.
+- CONTRIBUTING and `PROJECT.md`: `lite` carries the same skills as `main` and is synced after every merge that changes `AGENTS.md` or `.agents/`. `PROJECT.md` records the branch, merge, version and release workflow and two standing user decisions on `lite`.
+
 ## [v0.4.6] - 2026-11-17
 
 ### Changed
