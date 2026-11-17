@@ -1,3 +1,8 @@
+---
+name: multi-agent-workflow
+description: Plans delegation briefs and review gates, with a shared channel for peer sessions. Use for a task that benefits from explicit delegation or independent review.
+---
+
 # Skill: Multi-Agent Workflow
 
 Use for a task that benefits from delegation or independent review. A procedure, not
