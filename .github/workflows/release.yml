@@ -44,6 +44,23 @@ jobs:
           ref: lite
           fetch-depth: 1
 
+      - name: Check that lite is in sync with main
+        run: |
+          last=$(git -C lite log -1 --format=%B | sed '/^[[:space:]]*$/d' | tail -n 1)
+          derived=$(printf '%s\n' "$last" | sed -n 's/^Derived-from: \([0-9a-f]\{40\}\)$/\1/p')
+          if [ -z "$derived" ]; then
+            echo "::error::The latest lite commit does not end with 'Derived-from: <main commit>'."; exit 1
+          fi
+          if ! git -C repo merge-base --is-ancestor "$derived" "$GITHUB_SHA"; then
+            echo "::error::lite is derived from $derived, which is not in the history of this main commit."; exit 1
+          fi
+          if ! git -C repo diff --quiet "$derived" "$GITHUB_SHA" -- AGENTS.md .agents; then
+            echo "::error::main changed AGENTS.md or .agents/ since $derived; sync lite first."
+            git -C repo diff --stat "$derived" "$GITHUB_SHA" -- AGENTS.md .agents
+            exit 1
+          fi
+          echo "==> lite is derived from $derived; main has no kit changes since."
+
       - name: Determine and validate release version
         run: |
           input_ver=$(echo "$INPUT_VERSION" | tr -d '[:space:]')

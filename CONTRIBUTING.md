@@ -129,7 +129,7 @@ adds the license notice as `.agents/LICENSE`, and attaches a `.sha256` file.
 
 1. Move the `[Unreleased]` entries in `CHANGELOG.md` under `## [vX.Y.Z] - YYYY-MM-DD`
    and push to `main`.
-2. Ensure the `lite` branch contains the edition you want to release.
+2. Ensure `lite` is in sync with `main` (see below); the workflow refuses a stale `lite`.
 3. Run the Release workflow with `version: vX.Y.Z` (or leave empty to automatically release `v<VERSION>` from `VERSION`). It creates the tag and the release, and packages both `agents-kit-vX.Y.Z.zip`
    and `agents-kit-lite-vX.Y.Z.zip` together with their `.sha256` files.
 
@@ -137,8 +137,13 @@ adds the license notice as `.agents/LICENSE`, and attaches a `.sha256` file.
 
 `lite` holds only `AGENTS.md` and `.agents/` (including `.agents/.gitignore`),
 condensed for small context windows. Condensing may shorten wording and merge files,
-but must not drop safety or acceptance rules. End each `lite` commit message with a
-`Derived-from: <main commit>` line for provenance. The release workflow packages the checked-out `lite` commit without validating that trailer, main ancestry, or source freshness.
+but must not drop safety or acceptance rules. `lite` carries the same skills as `main`.
+After every merge to `main` that changes `AGENTS.md` or `.agents/`, sync `lite` from
+that merge commit and end the `lite` commit message with a `Derived-from: <main commit>`
+line. The Release workflow fails unless the latest `lite` commit ends with that line, the
+named commit is in the history of the released `main` commit, and `main` has not
+changed `AGENTS.md` or `.agents/` since. It does not check that the condensed content
+matches; review does.
 
 Create `lite` once, without shared history, in its own folder so untracked files of
 your `main` checkout cannot be added to it:

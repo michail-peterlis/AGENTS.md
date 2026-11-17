@@ -39,10 +39,22 @@ policies, skills and workflows—not an agent runtime or orchestration service.
 - Existing commit hooks validate shell syntax and Markdown line endings and bump
   the patch version in `VERSION`; follow `CONTRIBUTING.md` for the workflow.
 - The `lite` edition is maintained on a separate branch; changes here do not
-  automatically update it.
+  automatically update it. Sync it after every change to `AGENTS.md` or `.agents/`;
+  the Release workflow refuses a stale `lite`.
+- Workflow: feature branch → pull request → squash merge to `main`; the pre-commit
+  hook bumps `VERSION` on every commit; `lite` is synced from the merge commit;
+  releases run from `main` through the Release workflow. The user commits and pushes.
 
 ## Standing User Decisions
 
 - ".agents should be clean an only contain agents stuff." — 2026-11-11 — Project-wide:
   keep maintainer tooling and tests outside `.agents/`; retain reusable agent-facing
   instructions and workflow helpers there.
+- "reduce to a minimum is that the descriptions of the roles and policies should be as
+  short as possible so LLMs with low centext windows (<32k) still can work with the
+  skillset" — 2026-11-17 — `lite` edition: keep the same skills as `main`, and keep its
+  roles, policies and skills as short as possible without dropping safety or acceptance
+  rules, so models with context windows under 32k tokens can use the kit.
+- "lite should be kept always up to date, like now it is on version 0.4.6!" — 2026-11-17
+  — `lite` edition: after every change to `main`'s `AGENTS.md` or `.agents/`, sync
+  `lite` from that `main` commit (`Derived-from:` trailer), so both editions match.
