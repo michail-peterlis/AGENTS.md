@@ -4,7 +4,7 @@ All notable public changes to Enterprise Agents are documented here.
 
 This project uses semantic versioning for the governance contract. Behavioral changes may be breaking even when they are Markdown/configuration-only.
 
-## [v0.4.3] - 2026-11-17
+## [v0.4.5] - 2026-11-17
 
 ### Changed
 
