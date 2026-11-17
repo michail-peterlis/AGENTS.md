@@ -1,6 +1,6 @@
 ---
 name: dependency-upgrade
-description: Use when adding or upgrading a dependency.
+description: Adds or upgrades a dependency with a stated reason, release-note review and regression tests. Use when adding or upgrading a dependency.
 ---
 
 # Skill: Dependency Upgrade

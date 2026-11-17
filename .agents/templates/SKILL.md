@@ -1,6 +1,6 @@
 ---
 name: <skill-directory-name>
-description: <when to use this skill, one line, 200 characters or fewer>
+description: <what this skill does and when to use it, one line, 200 characters or fewer>
 ---
 
 # Skill: <name>

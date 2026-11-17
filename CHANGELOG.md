@@ -4,6 +4,16 @@ All notable public changes to Enterprise Agents are documented here.
 
 This project uses semantic versioning for the governance contract. Behavioral changes may be breaking even when they are Markdown/configuration-only.
 
+## [v0.4.3] - 2026-11-17
+
+### Changed
+
+- Each kit skill's `description` now says what the skill does as well as when to use it, and `evaluation-loop` keeps its exclusion. The SKILL template placeholder and the CONTRIBUTING rule ask for the same. Skill bodies, names and the checker are unchanged.
+
+### Notes
+
+- Harnesses that select skills by their descriptions may now choose them differently; routing through `AGENTS.md` is unchanged.
+
 ## [v0.4.2] - 2026-11-16
 
 ### Added

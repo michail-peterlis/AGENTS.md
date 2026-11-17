@@ -57,8 +57,8 @@ Every `SKILL` contribution starts its `.agents/skills/<name>/SKILL.md` with `nam
 `.agents/templates/SKILL.md`: `---` on the first line and a closing `---`, LF line
 endings; `name` equals the directory name and is 1–64 lowercase letters or digits in
 hyphen-separated words; `description` is one line of at most 200 characters that says
-when to use the skill, contains no `<` or `>`, and is double-quoted if it contains `:`
-or `#`. Inside double quotes, use JSON escapes such as `\"` and `\\`. The checker
+what the skill does and when to use it (and when not to, where that matters), contains
+no `<` or `>`, and is double-quoted if it contains `:` or `#`. Inside double quotes, use JSON escapes such as `\"` and `\\`. The checker
 enforces these rules.
 
 When changing coordination, review, or privacy rules, re-check the

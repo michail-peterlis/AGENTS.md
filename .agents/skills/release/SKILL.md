@@ -1,6 +1,6 @@
 ---
 name: release
-description: Use for release preparation or publication, and before writing a hook, pipeline gate, or release check.
+description: Verifies and publishes a release with identities, manifests and a rollback path. Use for release preparation or publication, and before writing a hook, pipeline gate, or release check.
 ---
 
 # Skill: Release
