@@ -4,11 +4,11 @@ All notable public changes to Enterprise Agents are documented here.
 
 This project uses semantic versioning for the governance contract. Behavioral changes may be breaking even when they are Markdown/configuration-only.
 
-## [v0.4.5] - 2026-11-17
+## [v0.4.6] - 2026-11-17
 
 ### Changed
 
-- Each kit skill's `description` now says what the skill does as well as when to use it, and `evaluation-loop` keeps its exclusion. The SKILL template placeholder and the CONTRIBUTING rule ask for the same. Skill bodies, names and the checker are unchanged.
+- Each kit skill's `description` now says what the skill does as well as when to use it, and `evaluation-loop` keeps its exclusion. The `multi-agent-workflow` description reserves the shared channel for peer sessions, as its body does. The SKILL template placeholder and the CONTRIBUTING rule ask for the same. Skill bodies, names and the checker are unchanged.
 
 ### Notes
 
